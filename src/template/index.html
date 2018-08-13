@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>gf home</title>
+{{/*<link rel="stylesheet" href="stylesheets/style.css">*/}}
+    <link rel="stylesheet" href="/static/plugin/markdown-css/github-markdown.css">
+    <link rel="stylesheet" href="/static/plugin/prism/prism.css">
+</head>
+<body>
+<div class="preview-wrap">
+    <div class="markdown-body" id="markdown-view">
+
+# 使用示例
+
+下面我们来举几个例子，看看如何使用```gvalid```来实现数据校验。
+
+## 单数据校验 - Check
+
+1、校验数据长度，使用默认的错误提示
+```go
+rule := "length:6,16"
+if m := gvalid.Check("123456", rule);  m != nil {
+    fmt.Println(m)
+}
+if m := gvalid.Check("12345", rule);  m != nil {
+    fmt.Println(m)
+}
+
+// 输出： map[length:字段长度为6到16个字符]
+```
+
+2、校验数据类型及大小，并且使用自定义的错误提示
+```go
+rule := "integer|between:6,16"
+msgs := "请输入一个整数|参数大小不对啊老铁"
+fmt.Println(gvalid.Check(5.66, rule, msgs))
+
+// 输出： map[integer:请输入一个整数 between:参数大小不对啊老铁]
+```
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/static/plugin/marked/marked.min.js"></script>
+<script src="/static/plugin/prism/prism.js"></script>
+{{/*<script src="/static/js/main.js"></script>*/}}
+
+<script type="application/javascript">
+    var markedRender = new marked.Renderer();
+    marked.setOptions({
+        renderer: markedRender,
+        gfm        : true,
+        tables     : true,
+        breaks     : true,  // '>' 换行，回车换成 <br>
+        pedantic   : false,
+        sanitize   : true,
+        smartLists : true,
+        smartypants: false
+    });
+    $(document).ready(function(){
+        $("#markdown-view").html(marked($("#markdown-view").html()));
+        $('.markdown-body code').each(function(i, block) {
+            Prism.highlightElement(block);
+        });
+    });
+</script>
+</body>
+</html>
