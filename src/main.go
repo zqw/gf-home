@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-    g.View().AddPath("template")
+    g.View().AddPath("static/template")
 }
 
 func main() {
