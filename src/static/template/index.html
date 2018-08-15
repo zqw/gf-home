@@ -3,336 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <title>gf home</title>
-
     <link rel="stylesheet" href="/static/plugin/editor.md/css/editormd.css">
     <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
-    <link rel="stylesheet" href="/static/plugin/amazeui-tree/amazeui.tree.css">
     <link rel="stylesheet" href="/static/css/style.css">
-    <style>
-        body {padding: 40px;}
-
-        #layout > header, .btns {
-            width: auto;
-        }
-
-        #sidebar {
-            width: 400px;
-            height: 100%;
-            position: fixed;
-            top: 0;
-            right: 0;
-            overflow: hidden;
-            background: #fff;
-            z-index: 100;
-            padding: 18px;
-            border: 1px solid #ddd;
-            border-top: none;
-            border-bottom: none;
-        }
-
-        #sidebar:hover {
-            overflow: auto;
-        }
-
-        #sidebar h1 {
-            font-size: 16px;
-        }
-
-        #custom-toc-container {
-            padding-left: 0;
-        }
-
-        #test-editormd-view, #test-editormd-view2 {
-            padding-left: 0;
-            padding-right: 430px;
-            margin: 0;
-        }
-    </style>
-
 </head>
 <body>
 
-<div id="side-menu" style="width:300px;float:left;">
-    <ul class="am-tree am-tree-folder-select" role="tree" id="myTreeSelectableFolder">
+<div class="container">
+<div class="side" id="side-markdown-view">
+    <textarea id="side-markdown-content" style="display:none;">
+* [框架介绍](框架介绍.md)
+* [源码目录](源码目录.md)
+* [加入团队](加入团队.md)
+* [Web服务开发](Web服务开发.md)
+    * [开始使用](HTTPServer.md)
+    * [路由控制](路由控制.md)
+    * [服务注册](服务注册.md)
+        * [基本介绍](基本介绍.md)
+        * [回调函数注册](回调方法注册.md)
+        * [执行对象注册](执行对象注册.md)
+        * [控制器方式注册](控制器注册.md)
+        * [事件回调(中间件)](事件回调注册.md)
+    * [Cookie](Cookie.md)
+    * [Session](Session.md)
+    * [输入输出](输入输出.md)
+        * [请求输入](请求输入.md)
+        * [请求输出](请求输出.md)
+        * [文件上传](文件上传.md)
+        * [HTTP客户端](输入输出.HTTP客户端.md)
+    * [对象管理](单例管理.md)
+    * [配置管理](配置管理.md)
+        * [基本用法](基本用法.md)
+        * [其他用法](其他用法.md)
+    * [数据校验](数据校验.md)
+    * [分页管理](分页管理.md)
+        * [基本介绍](分页管理.基本介绍.md)
+        * [动态分页](分页管理.动态分页.md)
+        * [静态分页](分页管理.静态分页.md)
+        * [Ajax分页](分页管理.Ajax分页.md)
+        * [URL模板](URL规则模板.md)
+        * [自定义分页](分页管理.自定义分页.md)
+    * [模板引擎](模板引擎.md)
+        * [使用方法](使用方法.md)
+        * [基本语法](基本语法.md)
+        * [基本函数](基本函数.md)
+    * [数据库ORM](数据库操作.md)
+        * [ORM基本介绍](ORM基本介绍.md)
+        * [ORM使用配置](数据库配置.md)
+        * [ORM链式操作](ORM链式操作.md)
+        * [ORM方法操作](ORM方法操作.md)
+        * [ORM事务操作](ORM事务操作.md)
+        * [ORM高级特性](ORM高级用法.md)
+        * [ORM数据库类型](ORM支持的数据库.md)
+    * [Web开发进阶](高级特性.md)
+        * [HTTPS服务](HTTPS服务.md)
+        * [平滑重启特性](平滑重启特性.md)
+        * [服务性能分析](服务性能分析.md)
+        * [服务日志管理](日志管理.md)
+        * [WebSocket服务](WebSocket.md)
+        * [自定义状态码处理](自定义状态处理.md)
+* [网络服务开发](网络服务开发.md)
+    * [TCP组件](TCP服务.md)
+        * [基本使用](TCPServer.md)
+        * [连接对象](TCPClient.md)
+        * [工具方法](工具方法.md)
+        * [连接池特性](ConnPool.md)
+    * [UDP组件](UDP服务.md)
+        * [基本使用](UDPServer.md)
+        * [连接对象](UDPClient.md)
+        * [工具方法](gudp.工具方法.md)
+    * [WebSocket](网络服务开发.WebSocket.md)
+* [功能模块设计](功能模块设计.md)
+    * [数据结构容器](并发安全容器.md)
+        * [gmap](gmap.md)
+        * [gtype](gtype.md)
+        * [glist](glist.md)
+        * [gset](gset.md)
+        * [garray](garray.md)
+        * [gqueue](gqueue.md)
+        * [gchan](gchan.md)
+        * [gpool](gpool.md)
+        * [gring](gring.md)
+    * [系统相关模块](系统相关模块.md)
+        * [gcache (高速缓存模块)](缓存模块.md)
+        * [glog (日志管理模块)](日志模块.md)
+        * [gtime (时间管理模块)](时间模块.md)
+        * [gcmd (命令行解析执行)](命令行模块.md)
+        * [gbinary (二进制编码解析)](二进制模块.md)
+        * [gflock (系统文件锁操作)](文件锁模块.md)
+        * [genv (环境变量模块)](环境变量模块.md)
+        * [gfile (文件管理模块)](文件管理模块.md)
+        * [gfsnotify (文件监控模块)](文件监控模块.md)
+        * [gproc (进程管理通信)](进程管理通信.md)
+        * [grpool (Goroutine池)](Goroutine池.md)
+    * [数据管理模块](数据管理模块.md)
+        * [gredis (Redis客户端)](Redis客户端.md)
+    * [编码解码模块](编码解析模块.md)
+        * [gparser (通用编码解析)](数据编码解析.md)
+        * [gjson (JSON编码解析)](JSON模块.md)
+        * [其他编码模块](通用编码模块.md)
+    * [加密解密模块](加密解密模块.md)
+        * [其他相关模块](其他相关模块.md)
+        * [gdes(des算法)](des算法.md)
+    * [实用工具模块](实用工具模块.md)
+        * [gconv (基本类型转换)](类型转换.md)
+    * [其他模块介绍](其他模块介绍.md)
 
-
-        <li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F1" aria-labelledby="F1-label">
-            <div class="am-tree-branch-header">
-                <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                <button class="am-tree-branch-name">
-                    <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                    <span class="am-tree-label" id="F1-label">Ascending and Descending</span>
-                </button>
-            </div>
-            <ul class="am-tree-branch-children am-hide" role="group"><li class="am-tree-branch am-tree-open" data-template="treebranch" role="treeitem" aria-expanded="true" id="F1" aria-labelledby="F1-label">
-                <div class="am-tree-branch-header">
-                    <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                    <button class="am-tree-branch-name">
-                        <span class="am-tree-icon am-tree-icon-folder am-icon-minus-square-o"></span>
-                        <span class="am-tree-label" id="F1-label">Ascending and Descending</span>
-                    </button>
-                </div>
-                <ul class="am-tree-branch-children" role="group"><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F1" aria-labelledby="F1-label">
-                    <div class="am-tree-branch-header">
-                        <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                        <button class="am-tree-branch-name">
-                            <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                            <span class="am-tree-label" id="F1-label">Ascending and Descending</span>
-                        </button>
-                    </div>
-                    <ul class="am-tree-branch-children" role="group"></ul>
-                    <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-                </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F2" aria-labelledby="F2-label">
-                    <div class="am-tree-branch-header">
-                        <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                        <button class="am-tree-branch-name">
-                            <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                            <span class="am-tree-label" id="F2-label">Drawing Hands</span>
-                        </button>
-                    </div>
-                    <ul class="am-tree-branch-children" role="group"></ul>
-                    <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-                </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F3" aria-labelledby="F3-label">
-                    <div class="am-tree-branch-header">
-                        <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                        <button class="am-tree-branch-name">
-                            <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                            <span class="am-tree-label" id="F3-label">Belvedere</span>
-                        </button>
-                    </div>
-                    <ul class="am-tree-branch-children" role="group"></ul>
-                    <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-                </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F4" aria-labelledby="F4-label">
-                    <div class="am-tree-branch-header">
-                        <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                        <button class="am-tree-branch-name">
-                            <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                            <span class="am-tree-label" id="F4-label">House of Stairs</span>
-                        </button>
-                    </div>
-                    <ul class="am-tree-branch-children" role="group"></ul>
-                    <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-                </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F5" aria-labelledby="F5-label">
-                    <div class="am-tree-branch-header">
-                        <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                        <button class="am-tree-branch-name">
-                            <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                            <span class="am-tree-label" id="F5-label">Belvedere</span>
-                        </button>
-                    </div>
-                    <ul class="am-tree-branch-children" role="group"></ul>
-                    <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-                </li></ul>
-                <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-            </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F2" aria-labelledby="F2-label">
-                <div class="am-tree-branch-header">
-                    <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                    <button class="am-tree-branch-name">
-                        <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                        <span class="am-tree-label" id="F2-label">Drawing Hands</span>
-                    </button>
-                </div>
-                <ul class="am-tree-branch-children" role="group"></ul>
-                <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-            </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F3" aria-labelledby="F3-label">
-                <div class="am-tree-branch-header">
-                    <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                    <button class="am-tree-branch-name">
-                        <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                        <span class="am-tree-label" id="F3-label">Belvedere</span>
-                    </button>
-                </div>
-                <ul class="am-tree-branch-children" role="group"></ul>
-                <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-            </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F4" aria-labelledby="F4-label">
-                <div class="am-tree-branch-header">
-                    <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                    <button class="am-tree-branch-name">
-                        <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                        <span class="am-tree-label" id="F4-label">House of Stairs</span>
-                    </button>
-                </div>
-                <ul class="am-tree-branch-children" role="group"></ul>
-                <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-            </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F5" aria-labelledby="F5-label">
-                <div class="am-tree-branch-header">
-                    <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                    <button class="am-tree-branch-name">
-                        <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                        <span class="am-tree-label" id="F5-label">Belvedere</span>
-                    </button>
-                </div>
-                <ul class="am-tree-branch-children" role="group"></ul>
-                <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-            </li></ul>
-            <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-        </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F2" aria-labelledby="F2-label">
-        <div class="am-tree-branch-header">
-            <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-            <button class="am-tree-branch-name">
-                <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                <span class="am-tree-label" id="F2-label">Drawing Hands</span>
-            </button>
-        </div>
-        <ul class="am-tree-branch-children am-hide" role="group"><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F1" aria-labelledby="F1-label">
-            <div class="am-tree-branch-header">
-                <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                <button class="am-tree-branch-name">
-                    <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                    <span class="am-tree-label" id="F1-label">Ascending and Descending</span>
-                </button>
-            </div>
-            <ul class="am-tree-branch-children am-hide" role="group"></ul>
-            <div class="am-tree-loader" role="alert">Loading...</div>
-        </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F2" aria-labelledby="F2-label">
-            <div class="am-tree-branch-header">
-                <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                <button class="am-tree-branch-name">
-                    <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                    <span class="am-tree-label" id="F2-label">Drawing Hands</span>
-                </button>
-            </div>
-            <ul class="am-tree-branch-children" role="group"></ul>
-            <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-        </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F3" aria-labelledby="F3-label">
-            <div class="am-tree-branch-header">
-                <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                <button class="am-tree-branch-name">
-                    <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                    <span class="am-tree-label" id="F3-label">Belvedere</span>
-                </button>
-            </div>
-            <ul class="am-tree-branch-children" role="group"></ul>
-            <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-        </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F4" aria-labelledby="F4-label">
-            <div class="am-tree-branch-header">
-                <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                <button class="am-tree-branch-name">
-                    <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                    <span class="am-tree-label" id="F4-label">House of Stairs</span>
-                </button>
-            </div>
-            <ul class="am-tree-branch-children" role="group"></ul>
-            <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-        </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F5" aria-labelledby="F5-label">
-            <div class="am-tree-branch-header">
-                <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                <button class="am-tree-branch-name">
-                    <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                    <span class="am-tree-label" id="F5-label">Belvedere</span>
-                </button>
-            </div>
-            <ul class="am-tree-branch-children am-hide" role="group"><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F1" aria-labelledby="F1-label">
-                <div class="am-tree-branch-header">
-                    <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                    <button class="am-tree-branch-name">
-                        <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                        <span class="am-tree-label" id="F1-label">Ascending and Descending</span>
-                    </button>
-                </div>
-                <ul class="am-tree-branch-children" role="group"></ul>
-                <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-            </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F2" aria-labelledby="F2-label">
-                <div class="am-tree-branch-header">
-                    <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                    <button class="am-tree-branch-name">
-                        <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                        <span class="am-tree-label" id="F2-label">Drawing Hands</span>
-                    </button>
-                </div>
-                <ul class="am-tree-branch-children" role="group"></ul>
-                <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-            </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F3" aria-labelledby="F3-label">
-                <div class="am-tree-branch-header">
-                    <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                    <button class="am-tree-branch-name">
-                        <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                        <span class="am-tree-label" id="F3-label">Belvedere</span>
-                    </button>
-                </div>
-                <ul class="am-tree-branch-children am-hide" role="group"><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F1" aria-labelledby="F1-label">
-                    <div class="am-tree-branch-header">
-                        <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                        <button class="am-tree-branch-name">
-                            <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                            <span class="am-tree-label" id="F1-label">Ascending and Descending</span>
-                        </button>
-                    </div>
-                    <ul class="am-tree-branch-children" role="group"></ul>
-                    <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-                </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F2" aria-labelledby="F2-label">
-                    <div class="am-tree-branch-header">
-                        <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                        <button class="am-tree-branch-name">
-                            <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                            <span class="am-tree-label" id="F2-label">Drawing Hands</span>
-                        </button>
-                    </div>
-                    <ul class="am-tree-branch-children" role="group"></ul>
-                    <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-                </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F3" aria-labelledby="F3-label">
-                    <div class="am-tree-branch-header">
-                        <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                        <button class="am-tree-branch-name">
-                            <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                            <span class="am-tree-label" id="F3-label">Belvedere</span>
-                        </button>
-                    </div>
-                    <ul class="am-tree-branch-children" role="group"></ul>
-                    <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-                </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F4" aria-labelledby="F4-label">
-                    <div class="am-tree-branch-header">
-                        <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                        <button class="am-tree-branch-name">
-                            <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                            <span class="am-tree-label" id="F4-label">House of Stairs</span>
-                        </button>
-                    </div>
-                    <ul class="am-tree-branch-children" role="group"></ul>
-                    <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-                </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F5" aria-labelledby="F5-label">
-                    <div class="am-tree-branch-header">
-                        <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                        <button class="am-tree-branch-name">
-                            <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                            <span class="am-tree-label" id="F5-label">Belvedere</span>
-                        </button>
-                    </div>
-                    <ul class="am-tree-branch-children" role="group"></ul>
-                    <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-                </li></ul>
-                <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-            </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F4" aria-labelledby="F4-label">
-                <div class="am-tree-branch-header">
-                    <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                    <button class="am-tree-branch-name">
-                        <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                        <span class="am-tree-label" id="F4-label">House of Stairs</span>
-                    </button>
-                </div>
-                <ul class="am-tree-branch-children" role="group"></ul>
-                <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-            </li><li class="am-tree-branch" data-template="treebranch" role="treeitem" aria-expanded="false" id="F5" aria-labelledby="F5-label">
-                <div class="am-tree-branch-header">
-                    <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
-                    <button class="am-tree-branch-name">
-                        <span class="am-tree-icon am-tree-icon-folder am-icon-plus-square-o"></span>
-                        <span class="am-tree-label" id="F5-label">Belvedere</span>
-                    </button>
-                </div>
-                <ul class="am-tree-branch-children" role="group"></ul>
-                <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-            </li></ul>
-            <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-        </li></ul>
-        <div class="am-tree-loader am-hide" role="alert">Loading...</div>
-    </li></ul>
+    </textarea>
 </div>
 
 
-<div class="main">
-    <div class="markdown-body" id="markdown-view">
-        <textarea id="markdown-content" style="display:none;">
+    <div class="markdown-body" id="main-markdown-view">
+        <textarea id="main-markdown-content" style="display:none;">
 [TOC]
 
 
@@ -385,11 +167,10 @@ fmt.Println(gvalid.Check(5.66, rule, msgs))
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script>
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.widgets.helper.min.js"></script>
-<script src="/static/plugin/amazeui-tree/amazeui.tree.js"></script>
 <script type="text/javascript">
     $(function() {
-        editormd.markdownToHTML("markdown-view", {
-            markdown        : $("#markdown-content").text(),
+        editormd.markdownToHTML("main-markdown-view", {
+            markdown        : $("#main-markdown-content").text(),
             toc             : true,
             // tocm            : true,    // Using [TOCM]
             // tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
@@ -401,7 +182,44 @@ fmt.Println(gvalid.Check(5.66, rule, msgs))
             markdownSourceCode : false
         });
 
-        $('#myTreeSelectableFolder').tree();
+        editormd.markdownToHTML("side-markdown-view", {
+            markdown        : $("#side-markdown-content").text(),
+            toc             : true,
+            // tocm            : true,    // Using [TOCM]
+            // tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+            gfm             : true,
+            emoji           : true,
+            taskList        : true,
+            tex             : true,
+            tocDropdown     : false,
+            markdownSourceCode : false
+        });
+
+        $("#side-markdown-view").find("ul").addClass("am-list am-list-border");
+
+        function indentTreeByLi(obj) {
+            if ($(obj).find("ul").length > 0) {
+                // 添加图标
+                if ($(obj).find("a").eq(0).find("i").length == 0) {
+                    $(obj).find("a").eq(0).prepend('<i class="am-icon-caret-down"></i> ');
+                }
+
+                // 递归处理树型缩进
+                $(obj).find("ul").eq(0).find(">li").each(function () {
+                    $(this).find("a").each(function () {
+                        var v = $(this).css("padding-left");
+                        var i = parseInt(v) + 40;
+                        $(this).css("padding-left", i + "px");
+                    })
+                    if ($(this).find(">ul").length > 0) {
+                        indentTreeByLi(this)
+                    }
+                })
+            }
+        }
+        $("#side-markdown-view").find("ul").eq(0).find(">li").each(function(){
+            indentTreeByLi(this)
+        })
     });
 </script>
 
