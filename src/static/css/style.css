@@ -6,12 +6,10 @@ ul {
     list-style: none;
 }
 
-
 #side-markdown-view {
     font-size:15px;
-    width: 300px;
+    width: 320px;
     border-right: 1px solid #ddd;
-    /*background-color: #fafafa;*/
     height: 100vh;
     display:flex;
     flex-direction: column;
@@ -35,15 +33,29 @@ ul {
     border-right: 0;
     border-top: 1px solid #dedede;
 }
-/*#side-markdown-view ul, #side-markdown-view ol {*/
-    /*padding-left: 0 !important;*/
-/*}*/
 
 #side-markdown-view i {
-    padding-right: 5px;
+    padding-right: 8px;
 }
 
 #main-markdown-view {
     transition: left .25s ease;
     flex:1;
+}
+
+#side-markdown-view a, #side-markdown-view a:visited {
+    color: #555;
+}
+#side-markdown-view a:hover {
+    color: #555;
+    border-bottom: 0;
+    text-decoration: none;
+}
+
+#side-markdown-view i {
+    width: 17px;
+}
+
+#side-markdown-view i.empty-i {
+    padding-right: 17px;
 }
