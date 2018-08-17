@@ -197,6 +197,7 @@ fmt.Println(gvalid.Check(5.66, rule, msgs))
 
         $("#side-markdown-view").find("ul").addClass("am-list am-list-border");
 
+        // 菜单树形结构处理
         function indentTreeByLi(obj) {
             if ($(obj).find("ul").length > 0) {
                 // 添加图标
@@ -218,10 +219,10 @@ fmt.Println(gvalid.Check(5.66, rule, msgs))
         $("#side-markdown-view").find("ul").eq(0).find(">li").each(function(){
             indentTreeByLi(this)
         });
-        // 点击事件
+        // 绑定li点击事件
         $("#side-markdown-view").find("li").click(function(){
             if ($(this).find("ul").length > 0) {
-                $(this).find("ul").eq(0).toggle()
+                $(this).find("ul").eq(0).toggle();
                 // 改变图标
                 if ($(this).find("ul").eq(0).css('display') == "none") {
                     $(this).find("i").eq(0).attr("class", "am-icon-caret-right");
@@ -231,6 +232,13 @@ fmt.Println(gvalid.Check(5.66, rule, msgs))
             }
             return false
         });
+        // 默认将第一级菜单展开
+        $("#side-markdown-view").find("li").each(function () {
+            if ($(this).find("ul").length > 0) {
+                $(this).trigger("click")
+            }
+        });
+        $("#side-markdown-view").find("ul").eq(0).find(">li").trigger("click")
     });
 </script>
 

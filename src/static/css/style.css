@@ -2,7 +2,11 @@
     display:flex;
 }
 
-ul {
+.markdown-toc-list {
+    font-size:16px;
+}
+
+#side-markdown-view ul {
     list-style: none;
 }
 
