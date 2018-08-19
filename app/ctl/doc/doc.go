@@ -11,7 +11,11 @@ import (
 type Controller struct { }
 
 func (c *Controller) Index(r *ghttp.Request) {
-    path   := r.Get("path")
+    path := r.Get("path")
+    if path == "" {
+        r.Response.RedirectTo("/doc/index")
+        return
+    }
     mdRoot := g.Config().GetString("gf-doc.path")
     ext    := gfile.Ext(path)
     if ext != "" {

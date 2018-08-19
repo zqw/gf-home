@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>gf home</title>
+    <title>GoFrame框架开发文档</title>
     <link rel="stylesheet" href="/static/plugin/editor.md/css/editormd.css">
     <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
     <link rel="stylesheet" href="/static/resource/css/style.css">
@@ -16,7 +16,9 @@
 
     <div class="markdown-body" id="main-markdown-view">
         <textarea id="main-markdown-content" style="display:none;">{{.mdMainContent}}</textarea>
+
     </div>
+    {{/*<a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>*/}}
 </div>
 
 
@@ -33,6 +35,13 @@
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script>
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.widgets.helper.min.js"></script>
 <script type="text/javascript">
+    // 打开节点,参数为li节点的jquery对象
+    function openNode(node) {
+        if (node.find("ul").eq(0).css('display') == "none") {
+            node.find("ul").eq(0).show()
+            node.find("i").eq(0).attr("class", "am-icon-caret-down");
+        }
+    }
     $(function() {
         editormd.markdownToHTML("side-markdown-view", {
             markdown        : $("#side-markdown-content").text(),
@@ -59,6 +68,28 @@
             markdownSourceCode : true
         });
 
+        // 修改a/img标签链接，统一加上前缀
+        $(document).find("a").each(function(){
+            var href = $(this).attr("href");
+            if (typeof href != "undefined" && href.length > 0) {
+                if (href.substr(0, 1) != "/" && href.substr(0, 1) != "#" && href.substr(0, 4) != "http") {
+                    $(this).attr("href", "/doc/" + href);
+                }
+                if (href.substr(0, 4) == "http") {
+                    $(this).attr("target", "_blank");
+                }
+            }
+        });
+        $(document).find("img").each(function(){
+            var src = $(this).attr("src");
+            if (typeof src != "undefined" && src.length > 0) {
+                if (src.substr(0, 1) != "/" && src.substr(0, 4) != "http") {
+                    $(this).attr("src", "/doc/" + src);
+                }
+            }
+        });
+
+        // 修改list样式
         $("#side-markdown-view").find("ul").addClass("am-list am-list-border");
 
         // 菜单树形结构处理
@@ -110,6 +141,12 @@
                 $(this).trigger("click")
             }
         });
+        // 高亮并展开当前打开的地址
+        var href = window.location.pathname;
+        var seli = $("a[href='"+ href +"']").parent("li");
+        seli.css("font-weight", "bold");
+        seli.css("background-color", "#e5e5e5");
+        openNode(seli.parent("ul").parent("li"));
     });
 </script>
 
