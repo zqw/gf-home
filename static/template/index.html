@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>gf home</title>
+    <link rel="stylesheet" href="/static/plugin/editor.md/css/editormd.css">
+    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <link rel="stylesheet" href="/static/resource/css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="side" id="side-markdown-view">
+        <textarea id="side-markdown-content" style="display:none;">{{.mdMenuContent}}</textarea>
+    </div>
+
+    <div class="markdown-body" id="main-markdown-view">
+        <textarea id="main-markdown-content" style="display:none;">{{.mdMainContent}}</textarea>
+    </div>
+</div>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/static/plugin/editor.md/lib/marked.min.js"></script>
+<script src="/static/plugin/editor.md/lib/prettify.min.js"></script>
+<script src="/static/plugin/editor.md/lib/raphael.min.js"></script>
+<script src="/static/plugin/editor.md/lib/underscore.min.js"></script>
+<script src="/static/plugin/editor.md/lib/sequence-diagram.min.js"></script>
+<script src="/static/plugin/editor.md/lib/flowchart.min.js"></script>
+<script src="/static/plugin/editor.md/lib/jquery.flowchart.min.js"></script>
+<script src="/static/plugin/editor.md/editormd.js"></script>
+<script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
+<script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script>
+<script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.widgets.helper.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        editormd.markdownToHTML("side-markdown-view", {
+            markdown        : $("#side-markdown-content").text(),
+            toc             : true,
+            htmlDecode      : true,
+            gfm             : true,
+            emoji           : true,
+            taskList        : true,
+            tex             : true,
+            tocDropdown     : false,
+            markdownSourceCode : true
+        });
+
+
+        editormd.markdownToHTML("main-markdown-view", {
+            markdown        : $("#main-markdown-content").text(),
+            htmlDecode      : true,
+            toc             : true,
+            gfm             : true,
+            emoji           : true,
+            taskList        : true,
+            tex             : true,
+            tocDropdown     : false,
+            markdownSourceCode : true
+        });
+
+        $("#side-markdown-view").find("ul").addClass("am-list am-list-border");
+
+        // 菜单树形结构处理
+        function indentTreeByLi(obj) {
+            if ($(obj).find("ul").length > 0) {
+                // 添加图标
+                $(obj).find("a").eq(0).find("i").attr("class", "am-icon-caret-down");
+                // 递归处理树型缩进
+                $(obj).find("ul").eq(0).find(">li").each(function () {
+                    $(this).find("a").each(function () {
+                        var v = $(this).css("padding-left");
+                        var i = parseInt(v) + 20;
+                        $(this).css("padding-left", i + "px");
+                    });
+                    if ($(this).find(">ul").length > 0) {
+                        indentTreeByLi(this)
+                    }
+                })
+            }
+        }
+        $("#side-markdown-view").find("a").prepend('<i class="empty-i"></i>');
+        $("#side-markdown-view").find("ul").eq(0).find(">li").each(function(){
+            indentTreeByLi(this)
+        });
+        // 绑定li点击事件
+        $("#side-markdown-view").find("li").click(function(){
+            if ($(this).find("ul").length > 0) {
+                $(this).find("ul").eq(0).toggle();
+                // 改变图标
+                if ($(this).find("ul").eq(0).css('display') == "none") {
+                    $(this).find("i").eq(0).attr("class", "am-icon-caret-right");
+                } else {
+                    $(this).find("i").eq(0).attr("class", "am-icon-caret-down");
+                }
+            } else {
+                window.location.href=$(this).find("a").eq(0).attr('href')
+            }
+            return false
+        });
+        // 先将所有带子级的li关闭
+        $("#side-markdown-view").find("ul").find(">li").each(function () {
+            if ($(this).find("ul").length > 0) {
+                $(this).trigger("click")
+            }
+        });
+        // 默认将第一级菜单展开
+        $("#side-markdown-view").find("ul").eq(0).find(">li").each(function () {
+            if ($(this).find("ul").length > 0) {
+                $(this).trigger("click")
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
