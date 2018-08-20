@@ -9,16 +9,21 @@
 </head>
 <body>
 
+<div class="ui inverted active dimmer" id="process">
+    <div class="ui massive text loader"></div>
+</div>
+
 <div class="container">
     <div class="side" id="side-markdown-view">
-        <textarea id="side-markdown-content" style="display:none;">{{.mdMenuContent}}</textarea>
+        {{.mdMenuContentParsed}}
     </div>
 
     <div class="markdown-body" id="main-markdown-view">
+        <div id="main-markdown-source">
+        {{.mdMainContentParsed}}
+        </div>
         <textarea id="main-markdown-content" style="display:none;">{{.mdMainContent}}</textarea>
-
     </div>
-    {{/*<a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>*/}}
 </div>
 
 
@@ -38,24 +43,11 @@
     // 打开节点,参数为li节点的jquery对象
     function openNode(node) {
         if (node.find("ul").eq(0).css('display') == "none") {
-            node.find("ul").eq(0).show()
+            node.find("ul").eq(0).show();
             node.find("i").eq(0).attr("class", "am-icon-caret-down");
         }
     }
     $(function() {
-        editormd.markdownToHTML("side-markdown-view", {
-            markdown        : $("#side-markdown-content").text(),
-            toc             : true,
-            htmlDecode      : true,
-            gfm             : true,
-            emoji           : true,
-            taskList        : true,
-            tex             : true,
-            tocDropdown     : false,
-            markdownSourceCode : true
-        });
-
-
         editormd.markdownToHTML("main-markdown-view", {
             markdown        : $("#main-markdown-content").text(),
             htmlDecode      : true,
@@ -65,7 +57,7 @@
             taskList        : true,
             tex             : true,
             tocDropdown     : false,
-            markdownSourceCode : true
+            markdownSourceCode : false
         });
 
         // 修改a/img标签链接，统一加上前缀
@@ -147,6 +139,8 @@
         seli.css("font-weight", "bold");
         seli.css("background-color", "#e5e5e5");
         openNode(seli.parent("ul").parent("li"));
+
+        $("#main-markdown-source").hide()
     });
 </script>
 

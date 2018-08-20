@@ -6,6 +6,7 @@ import (
     "fmt"
     "gitee.com/johng/gf/g/os/gfile"
     "gitee.com/johng/gf/g/os/gview"
+    "gitee.com/johng/gf-home/app/lib/doc"
 )
 
 type Controller struct { }
@@ -18,19 +19,14 @@ func (c *Controller) Index(r *ghttp.Request) {
     }
     mdRoot := g.Config().GetString("gf-doc.path")
     ext    := gfile.Ext(path)
-    if ext != "" {
+    if ext != "" && ext != "md" {
         r.Response.ServeFile(fmt.Sprintf("%s%s%s", mdRoot, gfile.Separator, path))
         return
     }
-    mdMenuPath    := fmt.Sprintf("%s%smenus.md", mdRoot, gfile.Separator)
-    mdMainPath    := fmt.Sprintf("%s%s%s.md",    mdRoot, gfile.Separator, path)
-    mdMenuContent := gfile.GetContents(mdMenuPath)
-    mdMainContent := ""
-    if gfile.Exists(mdMainPath) {
-        mdMainContent = gfile.GetContents(mdMainPath)
-    }
+
     r.Response.Template("index.html", g.Map {
-        "mdMenuContent" : gview.HTML(mdMenuContent),
-        "mdMainContent" : gview.HTML(mdMainContent),
+        "mdMenuContentParsed" : gview.HTML(doc.GetParsed("menus")),
+        "mdMainContentParsed" : gview.HTML(doc.GetParsed(path)),
+        "mdMainContent"       : gview.HTML(doc.GetMarkdown(path)),
     })
 }
