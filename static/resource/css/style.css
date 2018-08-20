@@ -2,58 +2,9 @@
     display:flex;
 }
 
-.ui.inverted.dimmer {
-    background-color: hsla(0,0%,100%,.85);
-}
-.dimmed.dimmable>.ui.animating.dimmer, .dimmed.dimmable>.ui.visible.dimmer, .ui.active.dimmer {
-    display: block;
-    opacity: 1;
-}
-.ui.inverted.dimmer .ui.massive.loader, .ui.massive.loader {
-    width: 4.57142857rem;
-    height: 4.57142857rem;
-    font-size: 1.71428571em;
-}
-.ui.inverted.dimmer .ui.loader, .ui.loader {
-    width: 2.28571429rem;
-    height: 2.28571429rem;
-    font-size: 1em;
-}
-.ui.inverted.dimmer .ui.loader {
-    color: rgba(0,0,0,.87);
-}
-.ui.massive.text.loader {
-    min-width: 4.57142857rem;
-    padding-top: 5.35714286rem;
-}
-.ui.dimmer .ui.loader {
-    color: hsla(0,0%,100%,.9);
-}
-.ui.text.loader {
-    min-width: 2.28571429rem;
-    padding-top: 3.07142857rem;
-}
-.ui.text.loader {
-    width: auto!important;
-    height: auto!important;
-    text-align: center;
-    font-style: normal;
-}
-.ui.dimmer .loader {
-    display: block;
-}
-.ui.loader {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: 0;
-    text-align: center;
-    z-index: 1000;
-    transform: translateX(-50%) translateY(-50%);
-}
+
 .ui.dimmer {
-    display: none;
+    display: block;
     position: absolute;
     top: 0!important;
     left: 0!important;
@@ -61,19 +12,42 @@
     height: 100%;
     text-align: center;
     vertical-align: middle;
-    background-color: rgba(0,0,0,.85);
-    opacity: 0;
-    line-height: 1;
-    animation-fill-mode: both;
-    animation-duration: .5s;
-    transition: background-color .5s linear;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    will-change: opacity;
+    background-color: #fff;
+    opacity: 0.9;
     z-index: 1000;
 }
+
+.loading{
+    position: absolute;
+    top: 40%;
+    left: 48%;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 5px solid #BEBEBE;
+    border-left: 5px solid #498aca;
+    animation: load 1s linear infinite;
+    -moz-animation:load 1s linear infinite;
+    -webkit-animation: load 1s linear infinite;
+    -o-animation:load 1s linear infinite;
+}
+
+@-webkit-keyframes load
+{
+    from{-webkit-transform:rotate(0deg);}
+    to{-webkit-transform:rotate(360deg);}
+}
+@-moz-keyframes load
+{
+    from{-moz-transform:rotate(0deg);}
+    to{-moz-transform:rotate(360deg);}
+}
+@-o-keyframes load
+{
+    from{-o-transform:rotate(0deg);}
+    to{-o-transform:rotate(360deg);}
+}
+
 
 .markdown-toc-list {
     font-size:16px;

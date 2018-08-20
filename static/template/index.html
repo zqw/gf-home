@@ -10,8 +10,9 @@
 <body>
 
 <div class="ui inverted active dimmer" id="process">
-    <div class="ui massive text loader"></div>
+    <div class="ui massive loading"></div>
 </div>
+
 
 <div class="container">
     <div class="side" id="side-markdown-view">
@@ -141,6 +142,7 @@
         openNode(seli.parent("ul").parent("li"));
 
         $("#main-markdown-source").hide()
+        $("#process").hide()
     });
 </script>
 
