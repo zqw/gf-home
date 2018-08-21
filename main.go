@@ -2,7 +2,7 @@ package main
 
 import (
     "gitee.com/johng/gf/g"
-    "gitee.com/johng/gf-home/app/ctl/doc"
+    _ "gitee.com/johng/gf-home/app/ctl/doc"
 )
 
 func init() {
@@ -16,9 +16,6 @@ func main() {
         "/config/*",
         // "/static/template/*",
     })
-
-    // 我们可以将所有的路由注册放到这里执行
-    s.BindObjectMethod("/doc/*path", new(ctldoc.Controller), "Index")
 
     s.SetPort(8199)
     s.Run()
