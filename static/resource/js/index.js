@@ -13,6 +13,30 @@ function openNode(node) {
     }
 }
 
+// 替换a标签及img标签的地址，加上/doc前缀
+function replaceHrefAndSrc() {
+    // 修改a/img标签链接，给相对路径统一加上前缀
+    $(document).find("a").each(function(){
+        var href = $(this).attr("href");
+        if (typeof href != "undefined" && href.length > 0) {
+            if (href.substr(0, 1) != "/" && href.substr(0, 1) != "#" && href.substr(0, 4) != "http") {
+                $(this).attr("href", "/doc/" + href);
+            }
+            if (href.substr(0, 4) == "http") {
+                $(this).attr("target", "_blank");
+            }
+        }
+    });
+    $(document).find("img").each(function(){
+        var src = $(this).attr("src");
+        if (typeof src != "undefined" && src.length > 0) {
+            if (src.substr(0, 1) != "/" && src.substr(0, 4) != "http") {
+                $(this).attr("src", "/doc/" + src);
+            }
+        }
+    });
+}
+
 // 取消当前的li高亮
 function cancelAllHighlight() {
     $("#side-markdown-view").find("li").removeClass("active");
@@ -39,6 +63,7 @@ function reloadMainMarkdown() {
         tocDropdown     : false,
         markdownSourceCode : false
     });
+    replaceHrefAndSrc()
 }
 
 // 请求markdown内容
@@ -70,25 +95,7 @@ function loadMarkdown(uri) {
 $(function() {
     reloadMainMarkdown()
     // 修改a/img标签链接，给相对路径统一加上前缀
-    $(document).find("a").each(function(){
-        var href = $(this).attr("href");
-        if (typeof href != "undefined" && href.length > 0) {
-            if (href.substr(0, 1) != "/" && href.substr(0, 1) != "#" && href.substr(0, 4) != "http") {
-                $(this).attr("href", "/doc/" + href);
-            }
-            if (href.substr(0, 4) == "http") {
-                $(this).attr("target", "_blank");
-            }
-        }
-    });
-    $(document).find("img").each(function(){
-        var src = $(this).attr("src");
-        if (typeof src != "undefined" && src.length > 0) {
-            if (src.substr(0, 1) != "/" && src.substr(0, 4) != "http") {
-                $(this).attr("src", "/doc/" + src);
-            }
-        }
-    });
+    replaceHrefAndSrc()
 
     // 修改list样式
     $("#side-markdown-view").find("ul").addClass("am-list am-list-border");
