@@ -51,19 +51,22 @@ function highlightCurrentLi() {
 
 // 重新解析markdown内容
 function reloadMainMarkdown() {
-    $("#main-markdown-view").html("");
-    editormd.markdownToHTML("main-markdown-view", {
-        markdown        : $("#main-markdown-content").text(),
-        htmlDecode      : true,
-        toc             : true,
-        gfm             : true,
-        emoji           : true,
-        taskList        : true,
-        tex             : true,
-        tocDropdown     : false,
-        markdownSourceCode : false
+    $('#main-markdown-view').html(marked($("#main-markdown-content").text()));
+    $('#main-markdown-view pre code').each(function(i, block) {
+      Prism.highlightElement(block);
     });
     replaceHrefAndSrc()
+    // 生成TOC菜单
+    $('#main-markdown-toc').html("")
+    new Toc('main-markdown-view', {
+        'level'   : 3,
+        'class'   : 'toc',
+        'targetId': 'main-markdown-toc'
+    } );
+    if ($('#main-markdown-toc').html().length > 0) {
+        var html = $("#main-markdown-view").html().replace("<p>[TOC]</p>", $('#main-markdown-toc').html())
+        $("#main-markdown-view").html(html)
+    }
 }
 
 // 请求markdown内容
@@ -93,6 +96,8 @@ function loadMarkdown(uri) {
 }
 
 $(function() {
+
+
     reloadMainMarkdown()
     // 修改a/img标签链接，给相对路径统一加上前缀
     replaceHrefAndSrc()

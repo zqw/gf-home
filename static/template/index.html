@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>{{.title}}</title>
-    <link rel="stylesheet" href="/static/plugin/editor.md/css/editormd.css">
     <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <link rel="stylesheet" href="/static/plugin/markdown-css/github-markdown.css">
+    <link rel="stylesheet" href="/static/plugin/prism/prism.css">
     <link rel="stylesheet" href="/static/resource/css/style.css">
     <script type="application/javascript">
         var baseTitle = "{{.baseTitle}}"
@@ -21,22 +22,18 @@
         {{.mdMenuContentParsed}}
     </div>
 
-    <div class="markdown-body editormd-html-preview" id="main-markdown-view">
+    <div class="markdown-body" id="main-markdown-view">
         {{.mdMainContentParsed}}
     </div>
+    <div id="main-markdown-toc" style="display:none;"></div>
     <textarea id="main-markdown-content" style="display:none;">{{.mdMainContent}}</textarea>
 </div>
 
 
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="/static/plugin/editor.md/lib/marked.min.js"></script>
-<script src="/static/plugin/editor.md/lib/prettify.min.js"></script>
-<script src="/static/plugin/editor.md/lib/raphael.min.js"></script>
-<script src="/static/plugin/editor.md/lib/underscore.min.js"></script>
-<script src="/static/plugin/editor.md/lib/sequence-diagram.min.js"></script>
-<script src="/static/plugin/editor.md/lib/flowchart.min.js"></script>
-<script src="/static/plugin/editor.md/lib/jquery.flowchart.min.js"></script>
-<script src="/static/plugin/editor.md/editormd.js"></script>
+<script src="/static/plugin/marked/marked.min.js"></script>
+<script src="/static/plugin/md-toc/md-toc.min.js"></script>
+<script src="/static/plugin/prism/prism.js"></script>
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script>
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.widgets.helper.min.js"></script>

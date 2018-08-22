@@ -68,12 +68,6 @@ li.active {
     font-size:16px;
 }
 
-.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 {
-    margin-top: 0;
-}
-
-
-
 #side-markdown-view {
     font-size:16px;
     width: 320px;
@@ -118,6 +112,8 @@ li.active {
     flex:1;
     height: 100vh;
     padding-bottom: 150px;
+    padding:20px;
+    overflow: auto;
 }
 
 #side-markdown-view a, #side-markdown-view a:visited {
@@ -136,3 +132,17 @@ li.active {
 #side-markdown-view i.empty-i {
     padding-right: 17px;
 }
+
+/* 代码高亮自定义格式覆盖 */
+/* .com {
+  color: #8e908c !important;
+}
+.typ {
+    color: #000;
+}
+.pun, .opn, .clo {
+    color: #000;
+}
+.lit {
+    color: #0000FF;
+} */

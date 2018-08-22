@@ -19,7 +19,7 @@ func init() {
 
 // 文档首页
 func (c *Controller) Index(r *ghttp.Request) {
-    if r.Header.Get("X-Requested-With") != "" {
+    if r.IsAjax() {
         c.serveMarkdownAjax(r)
         return
     }
