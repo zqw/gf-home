@@ -14,19 +14,19 @@ type Controller struct { }
 
 
 func init() {
-    g.Server().BindObjectMethod("/doc/*path", new(Controller), "Index")
+    g.Server().BindObjectMethod("/*path", new(Controller), "Index")
 }
 
 // 文档首页
 func (c *Controller) Index(r *ghttp.Request) {
-    if r.IsAjax() {
+    if r.IsAjaxRequest() {
         c.serveMarkdownAjax(r)
         return
     }
 
     path := r.Get("path")
     if path == "" {
-        r.Response.RedirectTo("/doc/index")
+        r.Response.RedirectTo("/index")
         return
     }
     config := g.Config()

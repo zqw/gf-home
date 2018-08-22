@@ -1,9 +1,10 @@
+var currentUri = window.location.pathname;
 
 window.onpopstate = function() {
-    var state = window.history.state;
-    console.log(state)
-    loadMarkdown(state.uri)
-}
+    if (currentUri != window.location.pathname) {
+        loadMarkdown(window.location.pathname, false)
+    }
+};
 
 // 打开节点,参数为li节点的jquery对象
 function openNode(node) {
@@ -13,14 +14,14 @@ function openNode(node) {
     }
 }
 
-// 替换a标签及img标签的地址，加上/doc前缀
+// 替换a标签及img标签的地址，加上/前缀修改为绝对路径
 function replaceHrefAndSrc() {
     // 修改a/img标签链接，给相对路径统一加上前缀
     $(document).find("a").each(function(){
         var href = $(this).attr("href");
         if (typeof href != "undefined" && href.length > 0) {
             if (href.substr(0, 1) != "/" && href.substr(0, 1) != "#" && href.substr(0, 4) != "http") {
-                $(this).attr("href", "/doc/" + href);
+                $(this).attr("href", "/" + href);
             }
             if (href.substr(0, 4) == "http") {
                 $(this).attr("target", "_blank");
@@ -31,7 +32,7 @@ function replaceHrefAndSrc() {
         var src = $(this).attr("src");
         if (typeof src != "undefined" && src.length > 0) {
             if (src.substr(0, 1) != "/" && src.substr(0, 4) != "http") {
-                $(this).attr("src", "/doc/" + src);
+                $(this).attr("src", "/" + src);
             }
         }
     });
@@ -43,8 +44,8 @@ function cancelAllHighlight() {
 }
 
 // 高亮并展开当前打开的地址
-function highlightCurrentLi() {
-    var seli = $("a[href='"+ window.location.pathname +"']").parent("li")
+function highlightLiByUri(uri) {
+    var seli = $("a[href='"+ uri +"']").parent("li");
     seli.addClass("active");
     openNode(seli.parent("ul").parent("li"));
 }
@@ -55,9 +56,9 @@ function reloadMainMarkdown() {
     $('#main-markdown-view pre code').each(function(i, block) {
       Prism.highlightElement(block);
     });
-    replaceHrefAndSrc()
+    replaceHrefAndSrc();
     // 生成TOC菜单
-    $('#main-markdown-toc').html("")
+    $('#main-markdown-toc').html("");
     new Toc('main-markdown-view', {
         'level'   : 3,
         'class'   : 'toc',
@@ -67,16 +68,26 @@ function reloadMainMarkdown() {
         var html = $("#main-markdown-view").html().replace("<p>[TOC]</p>", $('#main-markdown-toc').html())
         $("#main-markdown-view").html(html)
     }
+    updateHelpUrl(window.location.pathname);
+}
+
+// 更新文档markdown链接地址
+function updateHelpUrl(uri) {
+    $("#help-icon").attr("href", "https://gitee.com/johng/gf-doc/tree/master" + uri + ".md");
 }
 
 // 请求markdown内容
-function loadMarkdown(uri) {
-    cancelAllHighlight()
+function loadMarkdown(uri, addState) {
+    currentUri = uri;
+    cancelAllHighlight();
     // 添加历史记录
-    window.history.pushState({
-        title : document.title,
-        uri   : window.location.pathname
-    }, document.title, window.location.origin + uri);
+    if (addState) {
+        window.history.pushState({
+            title : document.title,
+            uri   : window.location.pathname
+        }, document.title, window.location.origin + uri);
+    }
+    highlightLiByUri(uri);
     // 修改当前标题
     document.title = $("a[href='"+ uri +"']").text() + " - " + baseTitle
     $("#main-markdown-view").html("<div class=\"loading-small\"></div> Loading...");
@@ -87,20 +98,16 @@ function loadMarkdown(uri) {
         dataType : "json",
         success: function(result){
             if (result.code == 1) {
-                $("#main-markdown-content").text(result.data)
-                reloadMainMarkdown()
-                highlightCurrentLi()
+                $("#main-markdown-content").text(result.data);
+                reloadMainMarkdown();
             }
         }
     });
 }
 
 $(function() {
-
-
-    reloadMainMarkdown()
-    // 修改a/img标签链接，给相对路径统一加上前缀
-    replaceHrefAndSrc()
+    reloadMainMarkdown();
+    replaceHrefAndSrc();
 
     // 修改list样式
     $("#side-markdown-view").find("ul").addClass("am-list am-list-border");
@@ -138,7 +145,7 @@ $(function() {
                 $(this).find("i").eq(0).attr("class", "am-icon-caret-down");
             }
         } else {
-            loadMarkdown($(this).find("a").eq(0).attr('href'))
+            loadMarkdown($(this).find("a").eq(0).attr('href'), true)
         }
         return false
     });
@@ -155,7 +162,19 @@ $(function() {
         }
     });
     // 高亮并展开当前打开的地址
-    highlightCurrentLi()
+    highlightLiByUri(window.location.pathname);
 
     $("#process-mask").hide();
+
+    // 菜单关闭隐藏
+    $("#menu-icon").click(function () {
+        if ($("#side-markdown-view").css("display") == "none") {
+            $(this).css("left", "340px");
+            $("#side-markdown-view").show();
+        } else {
+            $(this).css("left", "20px");
+            $("#side-markdown-view").hide();
+        }
+
+    });
 });

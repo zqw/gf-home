@@ -16,15 +16,14 @@ func GetMarkdown(path string) string {
 
 // 获得解析为html的markdown文件内容
 func GetParsed(path string) string {
-    content := ParseMarkdown(GetMarkdown(path))
-    content  = gstr.ReplaceByMap(content, map[string]string{
-        `href="` : `href="/doc/`,
-    })
-    return content
+    return ParseMarkdown(GetMarkdown(path))
 }
 
 // 解析markdown为html
 func ParseMarkdown(content string) string {
-    output := blackfriday.Run([]byte(content))
-    return string(output)
+    content = string(blackfriday.Run([]byte(content)))
+    content = gstr.ReplaceByMap(content, map[string]string{
+        `href="` : `href="/`,
+    })
+    return content
 }

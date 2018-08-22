@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/static/plugin/markdown-css/github-markdown.css">
     <link rel="stylesheet" href="/static/plugin/prism/prism.css">
     <link rel="stylesheet" href="/static/resource/css/style.css">
+    <link rel="icon" href="/static/resource/image/gf-compress.ico" type="image/x-icon">
     <script type="application/javascript">
         var baseTitle = "{{.baseTitle}}"
     </script>
@@ -18,11 +19,16 @@
 
 
 <div class="container">
+    <a id="menu-icon" href="#"><i class="am-icon-align-justify am-icon-sm"></i></a>
+    <a id="help-icon" href="#" target="_blank" data-am-popover="{content:'文档改错',trigger:'hover focus'}"><i class="am-icon-github-alt am-icon-sm"></i></a>
+
+
     <div class="side" id="side-markdown-view">
         {{.mdMenuContentParsed}}
     </div>
 
     <div class="markdown-body" id="main-markdown-view">
+
         {{.mdMainContentParsed}}
     </div>
     <div id="main-markdown-toc" style="display:none;"></div>

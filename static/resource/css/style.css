@@ -1,6 +1,33 @@
 .container {
     display:flex;
 }
+.markdown-body a {
+    color: #4183c4;
+}
+
+.markdown-body a:hover {
+    color: #1e70bf;
+}
+
+#menu-icon {
+    position: fixed;
+    left: 340px;
+    top: 22px;
+}
+
+#menu-icon, #menu-icon:visited {
+    color: #666;
+}
+
+#help-icon {
+    position: fixed;
+    right: 50px;
+    top: 22px;
+}
+
+#help-icon, #help-icon:visited {
+    color: #666;
+}
 
 .ui.dimmer {
     display: block;
@@ -68,6 +95,10 @@ li.active {
     font-size:16px;
 }
 
+.markdown-body pre>code {
+    font-size:14px;
+}
+
 #side-markdown-view {
     font-size:16px;
     width: 320px;
@@ -111,9 +142,12 @@ li.active {
     transition: left .25s ease;
     flex:1;
     height: 100vh;
-    padding-bottom: 150px;
-    padding:20px;
+    padding: 20px 80px 150px 80px;
     overflow: auto;
+}
+
+.markdown-body ul, .markdown-body ol {
+    padding-left: 20px;
 }
 
 #side-markdown-view a, #side-markdown-view a:visited {
@@ -132,17 +166,3 @@ li.active {
 #side-markdown-view i.empty-i {
     padding-right: 17px;
 }
-
-/* 代码高亮自定义格式覆盖 */
-/* .com {
-  color: #8e908c !important;
-}
-.typ {
-    color: #000;
-}
-.pun, .opn, .clo {
-    color: #000;
-}
-.lit {
-    color: #0000FF;
-} */
