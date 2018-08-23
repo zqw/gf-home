@@ -10,17 +10,10 @@ import (
     "gitee.com/johng/gf/g/util/gregex"
 )
 
-type Controller struct { }
-
-
-func init() {
-    g.Server().BindObjectMethod("/*path", new(Controller), "Index")
-}
-
 // 文档首页
-func (c *Controller) Index(r *ghttp.Request) {
+func Index(r *ghttp.Request) {
     if r.IsAjaxRequest() {
-        c.serveMarkdownAjax(r)
+        serveMarkdownAjax(r)
         return
     }
 
@@ -30,13 +23,13 @@ func (c *Controller) Index(r *ghttp.Request) {
         return
     }
     config := g.Config()
-    mdRoot := config.GetString("gf-doc.path")
+    mdRoot := config.GetString("doc.path")
     ext    := gfile.Ext(path)
     if ext != "" && ext != "md" {
         r.Response.ServeFile(fmt.Sprintf("%s%s%s", mdRoot, gfile.Separator, path))
         return
     }
-    baseTitle    := config.GetString("gf-doc.title")
+    baseTitle    := config.GetString("doc.title")
     title        := baseTitle
     menuMarkdown := doc.GetMarkdown("menus")
     match, _     := gregex.MatchString(fmt.Sprintf(`\[(.+)\]\(%s\)`, path), menuMarkdown)
@@ -53,7 +46,7 @@ func (c *Controller) Index(r *ghttp.Request) {
 }
 
 // 处理ajax请求
-func (c *Controller) serveMarkdownAjax(r *ghttp.Request) {
+func serveMarkdownAjax(r *ghttp.Request) {
     r.Response.WriteJson(g.Map{
         "code" : 1,
         "msg"  : "",

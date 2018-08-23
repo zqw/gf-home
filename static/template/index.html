@@ -2,48 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{.title}}</title>
-    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
-    <link rel="stylesheet" href="/static/plugin/markdown-css/github-markdown.css">
-    <link rel="stylesheet" href="/static/plugin/prism/prism.css">
-    <link rel="stylesheet" href="/static/resource/css/style.css">
+    <title>{{Config index.title}}</title>
     <link rel="icon" href="/static/resource/image/gf-compress.ico" type="image/x-icon">
-    <script type="application/javascript">
-        var baseTitle = "{{.baseTitle}}"
-    </script>
 </head>
 <body>
-<div class="ui inverted active dimmer" id="process-mask">
-    <div class="ui massive loading"></div>
-</div>
+    <div class="container">
 
-
-<div class="container">
-    <a id="menu-icon" href="#"><i class="am-icon-align-justify am-icon-sm"></i></a>
-    <a id="help-icon" href="#" target="_blank" data-am-popover="{content:'文档改错',trigger:'hover focus'}"><i class="am-icon-github-alt am-icon-sm"></i></a>
-
-
-    <div class="side" id="side-markdown-view">
-        {{.mdMenuContentParsed}}
     </div>
-
-    <div class="markdown-body" id="main-markdown-view">
-
-        {{.mdMainContentParsed}}
-    </div>
-    <div id="main-markdown-toc" style="display:none;"></div>
-    <textarea id="main-markdown-content" style="display:none;">{{.mdMainContent}}</textarea>
-</div>
-
-
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="/static/plugin/marked/marked.min.js"></script>
-<script src="/static/plugin/md-toc/md-toc.min.js"></script>
-<script src="/static/plugin/prism/prism.js"></script>
-<script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
-<script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script>
-<script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.widgets.helper.min.js"></script>
-<script src="/static/resource/js/index.js"></script>
-
 </body>
 </html>

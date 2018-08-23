@@ -2,13 +2,9 @@ package main
 
 import (
     "gitee.com/johng/gf/g"
-    _ "gitee.com/johng/gf-home/app/ctl/doc"
+    _ "gitee.com/johng/gf-home/boot"
+    _ "gitee.com/johng/gf-home/router"
 )
-
-func init() {
-    g.View().AddPath("static/template")
-    g.Config().AddPath("config")
-}
 
 func main() {
     s := g.Server()
