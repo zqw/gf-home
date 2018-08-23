@@ -36,7 +36,7 @@ func Index(r *ghttp.Request) {
     if len(match) > 1 {
         title = fmt.Sprintf("%s - %s", match[1], baseTitle)
     }
-    r.Response.Template("index.html", g.Map {
+    r.Response.Template("doc.html", g.Map {
         "title"               : title,
         "baseTitle"           : baseTitle,
         "mdMenuContentParsed" : gview.HTML(doc.ParseMarkdown(menuMarkdown)),
