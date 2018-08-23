@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-    s := g.Server()
+    s := g.Server("doc")
     s.SetDenyRoutes([]string{
         "/config/*",
         // "/static/template/*",
