@@ -1,4 +1,10 @@
+[index]
+    title  = "官方网站 - GoFrame开发框架"
 
-[gf-doc]
-    title = "GoFrame框架开发文档 v0.99.682 beta"
-    path  = "/home/john/Workspace/Go/gf-doc"
+[doc]
+    title  = "GoFrame框架开发文档 v0.99.682 beta"
+    path   = "/home/john/Workspace/Go/gf-doc"
+    hook   = "pass"
+    [doc.admin]
+        user = "admin"
+        pass = "123"

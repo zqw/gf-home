@@ -8,6 +8,7 @@ import (
     "gitee.com/johng/gf/g/os/gview"
     "gitee.com/johng/gf-home/app/lib/doc"
     "gitee.com/johng/gf/g/util/gregex"
+    "gitee.com/johng/gf/g/os/gproc"
 )
 
 // 文档首页
@@ -43,6 +44,16 @@ func Index(r *ghttp.Request) {
         "mdMainContentParsed" : gview.HTML(doc.GetParsed(path)),
         "mdMainContent"       : gview.HTML(doc.GetMarkdown(path)),
     })
+}
+
+// 文档更新hook
+func UpdateHook(r *ghttp.Request) {
+    j := r.GetJson()
+    if j != nil && j.GetString("password") == g.Config().GetString("doc.hook") {
+        gproc.ShellRun(
+            fmt.Sprintf(`cd %s && git pull origin master`, g.Config().GetString("doc.path")),
+        )
+    }
 }
 
 // 处理ajax请求

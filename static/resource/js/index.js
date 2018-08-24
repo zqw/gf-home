@@ -19,12 +19,15 @@ function replaceHrefAndSrc() {
     // 修改a/img标签链接，给相对路径统一加上前缀
     $(document).find("a").each(function(){
         var href = $(this).attr("href");
-        // 替换掉".md"后缀
-        href = href.replace(".md", "");
-        $(this).attr("href", href);
         if (typeof href != "undefined" && href.length > 0) {
             if (href.substr(0, 1) != "/" && href.substr(0, 1) != "#" && href.substr(0, 4) != "http") {
-                $(this).attr("href", "/" + href);
+                href = "/" + href
+                if (href.indexOf(".md")) {
+                    href = href.replace(".md", "");
+                    $(this).attr("href", "javascript:loadMarkdown('" + href + "', true);");
+                } else {
+                    $(this).attr("href", href);
+                }
             }
             if (href.substr(0, 4) == "http") {
                 $(this).attr("target", "_blank");
@@ -110,8 +113,6 @@ function loadMarkdown(uri, addState) {
 
 $(function() {
     reloadMainMarkdown();
-    replaceHrefAndSrc();
-
     // 修改list样式
     $("#side-markdown-view").find("ul").addClass("am-list am-list-border");
 
