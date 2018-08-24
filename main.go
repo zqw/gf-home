@@ -7,12 +7,5 @@ import (
 )
 
 func main() {
-    s := g.Server("doc")
-    s.SetDenyRoutes([]string{
-        "/config/*",
-        // "/static/template/*",
-    })
-
-    s.SetPort(9999)
-    s.Run()
+    g.Server("doc").Run()
 }

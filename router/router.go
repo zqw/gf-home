@@ -6,7 +6,7 @@ import (
     "gitee.com/johng/gf/g/net/ghttp"
 )
 
-// 统一路由注册
+// 统一路由注册.
 func init() {
     // 开发文档
     g.Server("doc").BindHandler("/*path", ctldoc.Index)

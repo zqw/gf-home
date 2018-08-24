@@ -1,10 +1,16 @@
-[index]
-    title  = "官方网站 - GoFrame开发框架"
+# 应用系统设置
+[setting]
+    logpath = "/home/john/temp/logs/gf-home"
 
+# 官网首页设置
+[index]
+    title = "官方网站 - GoFrame开发框架"
+
+# 开发文档设置
 [doc]
-    title  = "GoFrame框架开发文档 v0.99.682 beta"
-    path   = "/home/john/Workspace/Go/gf-doc"
-    hook   = "pass"
+    title = "GoFrame框架开发文档"
+    path  = "/home/john/Workspace/Go/gf-doc2"
+    hook  = "pass"
     [doc.admin]
         user = "admin"
         pass = "123"

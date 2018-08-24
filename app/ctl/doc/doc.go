@@ -9,6 +9,7 @@ import (
     "gitee.com/johng/gf-home/app/lib/doc"
     "gitee.com/johng/gf/g/util/gregex"
     "gitee.com/johng/gf/g/os/gproc"
+    "gitee.com/johng/gf/g/os/glog"
 )
 
 // 文档首页
@@ -50,9 +51,10 @@ func Index(r *ghttp.Request) {
 func UpdateHook(r *ghttp.Request) {
     j := r.GetJson()
     if j != nil && j.GetString("password") == g.Config().GetString("doc.hook") {
-        gproc.ShellRun(
+        err := gproc.ShellRun(
             fmt.Sprintf(`cd %s && git pull origin master`, g.Config().GetString("doc.path")),
         )
+        glog.Cat("doc-hook").Printfln("doc hook update from: %s, err: %s", r.URL.String(), err.Error())
     }
 }
 
