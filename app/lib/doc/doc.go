@@ -7,6 +7,7 @@ import (
     "gitee.com/johng/gf/g/util/gregex"
     "fmt"
     "strings"
+    "gitee.com/johng/gf/g/util/gstr"
 )
 
 // 获得指定uri路径的markdown文件内容
@@ -26,7 +27,7 @@ func ParseMarkdown(content string) string {
     content    = string(blackfriday.Run([]byte(content)))
     pattern   := `href="(.+?)"`
     content, _ = gregex.ReplaceStringFunc(pattern, content, func(s string) string {
-        match, _ := gregex.MatchString(pattern, s)
+        match, _ := gregex.MatchString(pattern, gstr.Replace(s, ".md", ""))
         if len(match) > 1 {
             if match[1][0] != '/' && match[1][0] != '#' && !strings.Contains(match[1], "://") {
                 return fmt.Sprintf(`href="/%s"`, match[1])
