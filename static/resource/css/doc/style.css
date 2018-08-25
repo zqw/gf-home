@@ -1,3 +1,4 @@
+/* common */
 .container {
     display:flex;
 }
@@ -105,6 +106,7 @@ li.active {
     font-size:14px;
 }
 
+/* side */
 #side-markdown-view {
     font-size:16px;
     width: 320px;
@@ -143,6 +145,7 @@ li.active {
     padding-right: 8px;
 }
 
+/*  main */
 #main-markdown-view {
     font-size:16px;
     transition: left .25s ease;
@@ -150,6 +153,11 @@ li.active {
     height: 100vh;
     padding: 20px 80px 150px 80px;
     overflow: auto;
+}
+
+#main-markdown-view img {
+    display:block;
+    text-align: center;
 }
 
 .markdown-body ul, .markdown-body ol {
