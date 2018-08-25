@@ -9,6 +9,12 @@
     color: #1e70bf;
 }
 
+#main-markdown-404 {
+    text-align: center;
+}
+#main-markdown-content, main-markdown-toc {
+    display:none;
+}
 #menu-icon {
     position: fixed;
     left: 340px;

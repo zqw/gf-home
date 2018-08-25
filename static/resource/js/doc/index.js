@@ -58,22 +58,25 @@ function highlightLiByUri(uri) {
 
 // 重新解析markdown内容
 function reloadMainMarkdown() {
-    $('#main-markdown-view').html(marked($("#main-markdown-content").text()));
-    $('#main-markdown-view pre code').each(function(i, block) {
-      Prism.highlightElement(block);
-    });
-    replaceHrefAndSrc();
-    // 生成TOC菜单
-    $('#main-markdown-toc').html("");
-    new Toc('main-markdown-view', {
-        'level'   : 3,
-        'class'   : 'toc',
-        'targetId': 'main-markdown-toc'
-    } );
-    if ($('#main-markdown-toc').html().length > 0) {
-        var html = $("#main-markdown-view").html().replace("<p>[TOC]</p>", $('#main-markdown-toc').html())
-        $("#main-markdown-view").html(html)
+    var content = $("#main-markdown-content").text()
+    if (content.length > 0) {
+        $('#main-markdown-view').html(marked($("#main-markdown-content").text()));
+        $('#main-markdown-view pre code').each(function(i, block) {
+            Prism.highlightElement(block);
+        });
+        // 生成TOC菜单
+        $('#main-markdown-toc').html("");
+        new Toc('main-markdown-view', {
+            'level'   : 3,
+            'class'   : 'toc',
+            'targetId': 'main-markdown-toc'
+        } );
+        if ($('#main-markdown-toc').html().length > 0) {
+            var html = $("#main-markdown-view").html().replace("<p>[TOC]</p>", $('#main-markdown-toc').html())
+            $("#main-markdown-view").html(html)
+        }
     }
+    replaceHrefAndSrc();
     updateHelpUrl(window.location.pathname);
 }
 
@@ -95,7 +98,13 @@ function loadMarkdown(uri, addState) {
     }
     highlightLiByUri(uri);
     // 修改当前标题
-    document.title = $("a[href='"+ uri +"']").text() + " - " + baseTitle
+    var title = $("a[href='"+ uri +"']").text();
+    if (title.length > 0) {
+        title += " - " + baseTitle
+    } else {
+        title += "404 NOT FOUND - " + baseTitle
+    }
+    document.title = title;
     $("#main-markdown-view").html("<div class=\"loading-small\"></div> Loading...");
     // AJAX读取文档
     $.ajax({

@@ -10,6 +10,7 @@ import (
     "gitee.com/johng/gf/g/util/gregex"
     "gitee.com/johng/gf/g/os/gproc"
     "gitee.com/johng/gf/g/os/glog"
+    "gitee.com/johng/gf/g/encoding/gjson"
 )
 
 // 文档首页
@@ -18,7 +19,6 @@ func Index(r *ghttp.Request) {
         serveMarkdownAjax(r)
         return
     }
-
     path := r.Get("path")
     if path == "" {
         r.Response.RedirectTo("/index")
@@ -27,35 +27,45 @@ func Index(r *ghttp.Request) {
     config := g.Config()
     mdRoot := config.GetString("doc.path")
     ext    := gfile.Ext(path)
+    // 是否静态文件请求
     if ext != "" && ext != "md" {
         r.Response.ServeFile(fmt.Sprintf("%s%s%s", mdRoot, gfile.Separator, path))
         return
     }
+    // 菜单内容
     baseTitle    := config.GetString("doc.title")
     title        := baseTitle
     menuMarkdown := doc.GetMarkdown("menus")
-    match, _     := gregex.MatchString(fmt.Sprintf(`\[(.+)\]\(%s\)`, path), menuMarkdown)
+    fmt.Println(path)
+    match, _     := gregex.MatchString(fmt.Sprintf(`\[(.+)\]\(%s\.md\)`, path), menuMarkdown)
     if len(match) > 1 {
         title = fmt.Sprintf("%s - %s", match[1], baseTitle)
+    } else {
+        title = fmt.Sprintf("404 NOT FOUND - %s", baseTitle)
     }
-    r.Response.Template("doc.html", g.Map {
+    // markdown内容
+    mdMainContent       := doc.GetMarkdown(path)
+    mdMainContentParsed := doc.ParseMarkdown(mdMainContent)
+    r.Response.Template("doc/index.html", g.Map {
         "title"               : title,
         "baseTitle"           : baseTitle,
         "mdMenuContentParsed" : gview.HTML(doc.ParseMarkdown(menuMarkdown)),
-        "mdMainContentParsed" : gview.HTML(doc.GetParsed(path)),
-        "mdMainContent"       : gview.HTML(doc.GetMarkdown(path)),
+        "mdMainContentParsed" : gview.HTML(mdMainContentParsed),
+        "mdMainContent"       : gview.HTML(mdMainContent),
     })
 }
 
 // 文档更新hook
 func UpdateHook(r *ghttp.Request) {
-    j := r.GetJson()
+    raw    := r.GetRaw()
+    j, err := gjson.DecodeToJson(raw)
     if j != nil && j.GetString("password") == g.Config().GetString("doc.hook") {
-        err := gproc.ShellRun(
+        err = gproc.ShellRun(
             fmt.Sprintf(`cd %s && git pull origin master`, g.Config().GetString("doc.path")),
         )
-        glog.Cat("doc-hook").Printfln("doc hook update from: %s, err: %s", r.URL.String(), err.Error())
     }
+    glog.Cat("doc-hook").Printfln("doc hook update from: %s, error: %v, content: %s", r.URL.String(), err, string(raw))
+    r.Response.Write("ok")
 }
 
 // 处理ajax请求

@@ -24,6 +24,9 @@ func GetParsed(path string) string {
 
 // 解析markdown为html
 func ParseMarkdown(content string) string {
+    if content == "" {
+        return ""
+    }
     content    = string(blackfriday.Run([]byte(content)))
     pattern   := `href="(.+?)"`
     content, _ = gregex.ReplaceStringFunc(pattern, content, func(s string) string {

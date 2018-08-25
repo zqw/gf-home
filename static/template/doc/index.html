@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
     <link rel="stylesheet" href="/static/plugin/markdown-css/github-markdown.css">
     <link rel="stylesheet" href="/static/plugin/prism/prism.css">
-    <link rel="stylesheet" href="/static/resource/css/style.css">
+    <link rel="stylesheet" href="/static/resource/css/doc/style.css">
     <link rel="icon" href="/static/resource/image/favicon.ico" type="image/x-icon">
     <script type="application/javascript">
         var baseTitle = "{{.baseTitle}}"
@@ -22,15 +22,15 @@
     <a id="menu-icon" href="#"><i class="am-icon-align-justify am-icon-sm"></i></a>
     <a id="help-icon" href="#" target="_blank" data-am-popover="{content:'文档改错',trigger:'hover focus'}"><i class="am-icon-github-alt am-icon-sm"></i></a>
 
+    <div class="side" id="side-markdown-view">{{.mdMenuContentParsed}}</div>
 
-    <div class="side" id="side-markdown-view">
-        {{.mdMenuContentParsed}}
-    </div>
-
-    <div class="markdown-body" id="main-markdown-view">
-
-        {{.mdMainContentParsed}}
-    </div>
+    {{if ne .mdMainContent ""}}
+        <div class="markdown-body" id="main-markdown-view">{{.mdMainContentParsed}}</div>
+    {{else}}
+        <div class="markdown-body" id="main-markdown-view">
+        {{include "doc/include/404.html" .}}
+        </div>
+    {{end}}
     <div id="main-markdown-toc" style="display:none;"></div>
     <textarea id="main-markdown-content" style="display:none;">{{.mdMainContent}}</textarea>
 </div>
@@ -43,7 +43,7 @@
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script>
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.widgets.helper.min.js"></script>
-<script src="/static/resource/js/index.js"></script>
+<script src="/static/resource/js/doc/index.js"></script>
 
 </body>
 </html>
