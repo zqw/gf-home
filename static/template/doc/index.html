@@ -19,21 +19,23 @@
 
 
 <div class="container">
-    <a id="menu-icon" href="#"><i class="am-icon-align-justify am-icon-sm"></i></a>
-    <a id="help-icon" href="#" target="_blank" data-am-popover="{content:'文档改错',trigger:'hover focus'}"><i class="am-icon-github-alt am-icon-sm"></i></a>
+    <a id="menu-icon" href="#" title="打开/隐藏菜单"><i class="am-icon-align-justify am-icon-sm"></i></a>
+    <a id="help-icon" href="#" target="_blank" title="文档纠错/协作"><i class="am-icon-github-alt am-icon-sm"></i></a>
+    <a id="totop-icon" href="#" title="回到顶部" data-am-smooth-scroll><i class="am-icon-arrow-up am-icon-sm"></i></a>
 
     <div class="side" id="side-markdown-view">{{.mdMenuContentParsed}}</div>
 
+    <div class="markdown-body" id="main-markdown-view">
     {{if ne .mdMainContent ""}}
-        <div class="markdown-body" id="main-markdown-view">{{.mdMainContentParsed}}</div>
+        {{.mdMainContentParsed}}
     {{else}}
-        <div class="markdown-body" id="main-markdown-view">
         {{include "doc/include/404.html" .}}
-        </div>
     {{end}}
+    </div>
     <div id="main-markdown-toc" style="display:none;"></div>
     <textarea id="main-markdown-content" style="display:none;">{{.mdMainContent}}</textarea>
 </div>
+
 
 
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>

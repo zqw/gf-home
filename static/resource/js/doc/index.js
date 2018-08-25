@@ -1,5 +1,6 @@
 var currentUri = window.location.pathname;
 
+// 返回/前进浏览器事件
 window.onpopstate = function() {
     if (currentUri != window.location.pathname) {
         loadMarkdown(window.location.pathname, false)
@@ -124,7 +125,17 @@ $(function() {
     reloadMainMarkdown();
     // 修改list样式
     $("#side-markdown-view").find("ul").addClass("am-list am-list-border");
-
+    // 回到顶部
+    $('#totop-icon').on('click', function() {
+        $("#main-markdown-view").smoothScroll({position: 0, speed: 300});
+    });
+    $("#main-markdown-view").scroll(function() {
+        if ($(this).scrollTop() >= 400) {
+          $("#totop-icon").show();
+        } else {
+          $("#totop-icon").hide();
+        }
+    });
     // 菜单树形结构处理
     function indentTreeByLi(obj) {
         if ($(obj).find("ul").length > 0) {

@@ -10,6 +10,13 @@
     color: #1e70bf;
 }
 
+#totop-icon {
+    position: fixed;
+    bottom: 22px;
+    right: 50px;
+    display: none;
+}
+
 #main-markdown-404 {
     text-align: center;
 }
@@ -33,6 +40,10 @@
 }
 
 #help-icon, #help-icon:visited {
+    color: #666;
+}
+
+#totop-icon, #totop-icon:visited {
     color: #666;
 }
 
