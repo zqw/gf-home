@@ -12,6 +12,10 @@ func init() {
     g.Server("doc").BindHandler("/*path", ctldoc.Index)
     g.Server("doc").BindHandler("/hook",  ctldoc.UpdateHook)
     g.Server("doc").EnableAdmin("/admin")
+    // 某些浏览器直接请求favicon.ico文件，特别是产生404时
+    g.Server("doc").BindHandler("/favicon.ico", func(r *ghttp.Request) {
+        r.Response.ServeFile("/static/resource/image/favicon.ico")
+    })
     g.Server("doc").BindHookHandler("/admin/*", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {
         user := g.Config().GetString("doc.admin.user")
         pass := g.Config().GetString("doc.admin.pass")
