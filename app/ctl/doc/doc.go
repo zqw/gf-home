@@ -11,6 +11,7 @@ import (
     "gitee.com/johng/gf/g/os/gproc"
     "gitee.com/johng/gf/g/os/glog"
     "gitee.com/johng/gf/g/encoding/gjson"
+    "net/http"
 )
 
 // 文档首页
@@ -25,11 +26,10 @@ func Index(r *ghttp.Request) {
         return
     }
     config := g.Config()
-    mdRoot := config.GetString("doc.path")
-    ext    := gfile.Ext(path)
-    // 是否静态文件请求
-    if ext != "" && ext != "md" {
-        r.Response.ServeFile(fmt.Sprintf("%s%s%s", mdRoot, gfile.Separator, path))
+    // 如果是静态文件请求，那么表示Web Server没有找到该文件，那么直接404，本接口不支持待后缀的静态文件处理。
+    // 由于路由规则比较宽，这里也会有未存在的静态文件请求匹配进来。
+    if gfile.Ext(path) != "" {
+        r.Response.WriteStatus(http.StatusNotFound)
         return
     }
     // 菜单内容

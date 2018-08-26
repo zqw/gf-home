@@ -15,3 +15,5 @@ bin/
 cbuild
 */.DS_Store
 config/config.toml
+gf-home
+main

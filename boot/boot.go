@@ -10,14 +10,18 @@ func init() {
     v := g.View()
     c := g.Config()
     s := g.Server("doc")
+
+    // 配置对象及视图对象配置
     c.AddPath("config")
     v.AddPath("static/template")
 
+    // glog配置
     logpath := c.GetString("setting.logpath")
-
     glog.SetPath(logpath)
     glog.SetStdPrint(true)
 
+    // Web Server配置
+    s.AddSearchPath(c.GetString("doc.path"))
     s.SetDenyRoutes([]string{
         "/config/*",
     })
