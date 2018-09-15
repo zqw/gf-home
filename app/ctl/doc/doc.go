@@ -3,13 +3,9 @@ package ctldoc
 import (
     "gitee.com/johng/gf/g/net/ghttp"
     "gitee.com/johng/gf/g"
-    "fmt"
     "gitee.com/johng/gf/g/os/gfile"
     "gitee.com/johng/gf/g/os/gview"
     "gitee.com/johng/gf-home/app/lib/doc"
-    "gitee.com/johng/gf/g/util/gregex"
-    "gitee.com/johng/gf/g/os/gproc"
-    "gitee.com/johng/gf/g/os/glog"
     "gitee.com/johng/gf/g/encoding/gjson"
     "net/http"
 )
@@ -33,23 +29,19 @@ func Index(r *ghttp.Request) {
         return
     }
     // 菜单内容
-    baseTitle    := config.GetString("doc.title")
-    title        := baseTitle
-    menuMarkdown := doc.GetMarkdown("menus")
-    fmt.Println(path)
-    match, _     := gregex.MatchString(fmt.Sprintf(`\[(.+)\]\(%s\.md\)`, path), menuMarkdown)
-    if len(match) > 1 {
-        title = fmt.Sprintf("%s - %s", match[1], baseTitle)
-    } else {
-        title = fmt.Sprintf("404 NOT FOUND - %s", baseTitle)
+    baseTitle := config.GetString("doc.title")
+    title     := doc.GetTitleByPath(path)
+    if title == "" {
+        title = "404 NOT FOUND"
     }
+    title += " - " + config.GetString("doc.title")
     // markdown内容
     mdMainContent       := doc.GetMarkdown(path)
     mdMainContentParsed := doc.ParseMarkdown(mdMainContent)
-    r.Response.Template("doc/index.html", g.Map {
+    r.Response.WriteTpl("doc/index.html", g.Map {
         "title"               : title,
         "baseTitle"           : baseTitle,
-        "mdMenuContentParsed" : gview.HTML(doc.ParseMarkdown(menuMarkdown)),
+        "mdMenuContentParsed" : gview.HTML(doc.GetParsed("menus")),
         "mdMainContentParsed" : gview.HTML(mdMainContentParsed),
         "mdMainContent"       : gview.HTML(mdMainContent),
     })
@@ -59,12 +51,12 @@ func Index(r *ghttp.Request) {
 func UpdateHook(r *ghttp.Request) {
     raw    := r.GetRaw()
     j, err := gjson.DecodeToJson(raw)
-    if j != nil && j.GetString("password") == g.Config().GetString("doc.hook") {
-        err = gproc.ShellRun(
-            fmt.Sprintf(`cd %s && git pull origin master`, g.Config().GetString("doc.path")),
-        )
+    if err != nil {
+        panic(err)
     }
-    glog.Cat("doc-hook").Printfln("doc hook update from: %s, error: %v, content: %s", r.URL.String(), err, string(raw))
+    if j != nil && j.GetString("password") == g.Config().GetString("doc.hook") {
+        doc.UpdateDocGit()
+    }
     r.Response.Write("ok")
 }
 

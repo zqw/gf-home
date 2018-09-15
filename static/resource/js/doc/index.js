@@ -86,6 +86,19 @@ function updateHelpUrl(uri) {
     $("#help-icon").attr("href", "https://gitee.com/johng/gf-doc/tree/master" + uri + ".md");
 }
 
+// 修改当前标题
+function updateWindowTitle(uri) {
+    var title = ""
+    $("a[href='"+ uri +"']").parents("li").each(function(){
+        if (title == "") {
+            title  = $(this).find("a").eq(0).text()
+        } else {
+            title += " - " + $(this).find("a").eq(0).text()
+        }
+    })
+    document.title = title + " - " + baseTitle;
+}
+
 // 请求markdown内容
 function loadMarkdown(uri, addState) {
     currentUri = uri;
@@ -98,14 +111,7 @@ function loadMarkdown(uri, addState) {
         }, document.title, window.location.origin + uri);
     }
     highlightLiByUri(uri);
-    // 修改当前标题
-    var title = $("a[href='"+ uri +"']").text();
-    if (title.length > 0) {
-        title += " - " + baseTitle
-    } else {
-        title += "404 NOT FOUND - " + baseTitle
-    }
-    document.title = title;
+    updateWindowTitle(uri)
     $("#main-markdown-view").html("<div class=\"loading-small\"></div> Loading...");
     // AJAX读取文档
     $.ajax({
