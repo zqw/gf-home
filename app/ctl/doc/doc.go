@@ -1,4 +1,4 @@
-package ctldoc
+package ctlDoc
 
 import (
     "gitee.com/johng/gf/g/net/ghttp"
@@ -30,18 +30,18 @@ func Index(r *ghttp.Request) {
     }
     // 菜单内容
     baseTitle := config.GetString("doc.title")
-    title     := doc.GetTitleByPath(path)
+    title     := libDoc.GetTitleByPath(path)
     if title == "" {
         title = "404 NOT FOUND"
     }
     title += " - " + config.GetString("doc.title")
     // markdown内容
-    mdMainContent       := doc.GetMarkdown(path)
-    mdMainContentParsed := doc.ParseMarkdown(mdMainContent)
+    mdMainContent       := libDoc.GetMarkdown(path)
+    mdMainContentParsed := libDoc.ParseMarkdown(mdMainContent)
     r.Response.WriteTpl("doc/index.html", g.Map {
         "title"               : title,
         "baseTitle"           : baseTitle,
-        "mdMenuContentParsed" : gview.HTML(doc.GetParsed("menus")),
+        "mdMenuContentParsed" : gview.HTML(libDoc.GetParsed("menus")),
         "mdMainContentParsed" : gview.HTML(mdMainContentParsed),
         "mdMainContent"       : gview.HTML(mdMainContent),
     })
@@ -55,9 +55,18 @@ func UpdateHook(r *ghttp.Request) {
         panic(err)
     }
     if j != nil && j.GetString("password") == g.Config().GetString("doc.hook") {
-        doc.UpdateDocGit()
+        libDoc.UpdateDocGit()
     }
     r.Response.Write("ok")
+}
+
+// 搜索文档
+func Search(r *ghttp.Request) {
+    r.Response.WriteJson(g.Map{
+        "code" : 1,
+        "msg"  : "",
+        "data" : libDoc.SearchMdByKey(r.GetString("key")),
+    })
 }
 
 // 处理ajax请求
@@ -65,6 +74,6 @@ func serveMarkdownAjax(r *ghttp.Request) {
     r.Response.WriteJson(g.Map{
         "code" : 1,
         "msg"  : "",
-        "data" : doc.GetMarkdown(r.Get("path", "index")),
+        "data" : libDoc.GetMarkdown(r.Get("path", "index")),
     })
 }

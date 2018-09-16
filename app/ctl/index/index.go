@@ -1,4 +1,4 @@
-package ctlindex
+package ctlIndex
 
 import (
 	"gitee.com/johng/gf/g/net/ghttp"

@@ -137,6 +137,51 @@ li.active {
     margin:0;
 }
 
+#side-search {
+    height:45px;
+}
+
+#side-search input {
+    border-radius: 4px;
+    padding-left:35px;
+    padding-right: 35px;
+    height:37px;
+}
+
+#search-loading {
+    display:none;
+}
+#search-loading .loading-small {
+    margin-left:90px;
+}
+
+#search-input button {
+    color:#666;
+    font-size: 13px;
+    position: relative;
+    left: 4px;
+    top: -33px;
+    background: 0 0;
+    border: none;
+    outline: 0;
+}
+
+#clear-button {
+    text-align: right;
+}
+
+#clear-button button {
+    display: none;
+    color:#666;
+    font-size: 10px;
+    position: relative;
+    right: 5px;
+    top: -60px;
+    background: 0 0;
+    border: none;
+    outline: 0;
+}
+
 #side-markdown-view ul, #side-markdown-view ol {
     background-color: #fafafa;
     padding-left: 0 !important;

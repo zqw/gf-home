@@ -1,4 +1,4 @@
-package doc
+package libDoc
 
 import (
     "gitee.com/johng/gf/g/os/gfile"
@@ -12,6 +12,8 @@ import (
     "gitee.com/johng/gf/g/os/gcache"
     "gitee.com/johng/gf/g/os/gproc"
     "gitee.com/johng/gf/g/os/glog"
+    "gitee.com/johng/gf/g/container/garray"
+    "gitee.com/johng/gf/g/util/gconv"
 )
 
 var (
@@ -25,11 +27,41 @@ func UpdateDocGit() {
         fmt.Sprintf(`cd %s && git pull origin master`, g.Config().GetString("doc.path")),
     )
     if err == nil {
+        // 每次文档的更新都要清除缓存对象数据
         cache.Clear()
+
         glog.Cat("doc-hook").Printfln("doc hook updates")
     } else {
         glog.Cat("doc-hook").Printfln("doc hook updates error: %v",  err)
     }
+}
+
+// 根据关键字进行markdown文档搜索，返回文档path列表
+func SearchMdByKey(key string) []string {
+    glog.Cat("search").Println(key)
+    v := cache.GetOrSetFunc("doc_search_result_" + key, func() interface{} {
+        // 当该key的检索缓存不存在时，执行检索
+        array    := garray.NewStringArray(0, 0, false)
+        docPath  := g.Config().GetString("doc.path")
+        paths    := cache.GetOrSetFunc("doc_files_recursive", func() interface{} {
+            // 当目录列表不存在时，执行检索
+            paths, _ := gfile.ScanDir(docPath, "*.md", true)
+            return paths
+        }, 0)
+        for _, path := range gconv.Strings(paths) {
+            content := gfcache.GetContents(path)
+            if len(content) > 0 {
+                if strings.Index(content, key) != -1 {
+                    index := gstr.Replace(path, ".md", "")
+                    index  = gstr.Replace(index, docPath, "")
+                    array.Append(index)
+                }
+            }
+        }
+        return array.Slice()
+    }, 0)
+
+    return gconv.Strings(v)
 }
 
 // 根据path参数获得层级显示的title

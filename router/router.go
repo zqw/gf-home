@@ -9,8 +9,9 @@ import (
 // 统一路由注册.
 func init() {
     // 开发文档
-    g.Server("doc").BindHandler("/*path", ctldoc.Index)
-    g.Server("doc").BindHandler("/hook",  ctldoc.UpdateHook)
+    g.Server("doc").BindHandler("/*path",   ctlDoc.Index)
+    g.Server("doc").BindHandler("/hook",    ctlDoc.UpdateHook)
+    g.Server("doc").BindHandler("/search",  ctlDoc.Search)
     g.Server("doc").EnableAdmin("/admin")
     // 某些浏览器直接请求favicon.ico文件，特别是产生404时
     g.Server("doc").BindHandler("/favicon.ico", func(r *ghttp.Request) {

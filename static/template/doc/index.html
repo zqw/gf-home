@@ -25,7 +25,28 @@
     <a id="help-icon" href="#" target="_blank" title="文档纠错/协作"><i class="am-icon-github-alt am-icon-sm"></i></a>
     <a id="totop-icon" href="#" title="回到顶部" data-am-smooth-scroll><i class="am-icon-arrow-up am-icon-sm"></i></a>
 
-    <div class="side" id="side-markdown-view">{{.mdMenuContentParsed}}</div>
+    <div class="side" id="side-markdown-view">
+        <div id="side-search">
+            <form class="am-form">
+                <div id="search-input">
+                    <input type="text" class="" id="search-key" placeholder="输入搜索关键字..." />
+                    <input type="text" style="display: none;" />
+                    <button type="button" title="点击搜索"><span class="am-icon-search am-icon-sm"></span></button>
+                </div>
+                <div id="clear-button">
+                    <button type="button" title="清除搜索"><span class="am-icon-remove am-icon-sm"></span></button>
+                </div>
+            </form>
+        </div>
+
+        <div id="search-loading">
+            <div class="loading-small"></div> Searching...
+        </div>
+
+        <div id="side-menus">
+            {{.mdMenuContentParsed}}
+        </div>
+    </div>
 
     <div class="markdown-body" id="main-markdown-view">
     {{if ne .mdMainContent ""}}

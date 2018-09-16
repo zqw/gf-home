@@ -88,14 +88,14 @@ function updateHelpUrl(uri) {
 
 // 修改当前标题
 function updateWindowTitle(uri) {
-    var title = ""
+    var title = "";
     $("a[href='"+ uri +"']").parents("li").each(function(){
         if (title == "") {
             title  = $(this).find("a").eq(0).text()
         } else {
             title += " - " + $(this).find("a").eq(0).text()
         }
-    })
+    });
     document.title = title + " - " + baseTitle;
 }
 
@@ -111,7 +111,7 @@ function loadMarkdown(uri, addState) {
         }, document.title, window.location.origin + uri);
     }
     highlightLiByUri(uri);
-    updateWindowTitle(uri)
+    updateWindowTitle(uri);
     $("#main-markdown-view").html("<div class=\"loading-small\"></div> Loading...");
     // AJAX读取文档
     $.ajax({
@@ -205,6 +205,41 @@ $(function() {
             $(this).css("left", "20px");
             $("#side-markdown-view").hide();
         }
+    });
 
+    // 搜索按钮
+    $("#search-input button").click(function () {
+        $("#side-menus").find("li").hide();
+        $("#search-loading").show();
+        $.ajax({
+            type     : "get",
+            url      : "/search",
+            data     : "key=" + encodeURIComponent($("#search-key").val()),
+            dataType : "json",
+            success: function(result){
+                if (result.code == 1) {
+                    for (var i = 0; i < result.data.length; i++) {
+                        $("a[href='"+ result.data[i] +"']").parents("li").show();
+                    }
+                }
+                $("#search-loading").hide();
+                if ($("#search-key").val().length > 0) {
+                    $("#clear-button button").show();
+                } else {
+                    $("#clear-button button").hide();
+                }
+            }
+        });
+    });
+    // 回车按钮触发搜索按钮点击事件
+    $("#search-key").on("keydown", function (event) {
+        if (event.keyCode == 13) {
+            $("#search-input button").trigger("click");
+        }
+    });
+    // 搜索清除按钮
+    $("#clear-button button").click(function () {
+        $("#search-key").val("");
+        $("#search-input button").trigger("click");
     });
 });
