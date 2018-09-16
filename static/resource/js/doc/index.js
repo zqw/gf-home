@@ -209,27 +209,29 @@ $(function() {
 
     // 搜索按钮
     $("#search-input button").click(function () {
-        $("#side-menus").find("li").hide();
-        $("#search-loading").show();
-        $.ajax({
-            type     : "get",
-            url      : "/search",
-            data     : "key=" + encodeURIComponent($("#search-key").val()),
-            dataType : "json",
-            success: function(result){
-                if (result.code == 1) {
-                    for (var i = 0; i < result.data.length; i++) {
-                        $("a[href='"+ result.data[i] +"']").parents("li").show();
+        var key = $("#search-key").val();
+        if (key.length == 0) {
+            $("#side-menus").find("li").show();
+            $("#clear-button button").hide();
+        } else {
+            $("#side-menus").find("li").hide();
+            $("#search-loading").show();
+            $.ajax({
+                type     : "get",
+                url      : "/search",
+                data     : "key=" + encodeURIComponent(key),
+                dataType : "json",
+                success: function(result){
+                    if (result.code == 1) {
+                        for (var i = 0; i < result.data.length; i++) {
+                            $("a[href='"+ result.data[i] +"']").parents("li").show();
+                        }
                     }
-                }
-                $("#search-loading").hide();
-                if ($("#search-key").val().length > 0) {
+                    $("#search-loading").hide();
                     $("#clear-button button").show();
-                } else {
-                    $("#clear-button button").hide();
                 }
-            }
-        });
+            });
+        }
     });
     // 回车按钮触发搜索按钮点击事件
     $("#search-key").on("keydown", function (event) {
