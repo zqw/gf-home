@@ -217,7 +217,7 @@ li.active {
 }
 
 #main-markdown-view pre {
-    max-height: 600px;
+    max-height: 800px;
     overflow: auto;
 }
 
