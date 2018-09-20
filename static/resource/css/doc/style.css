@@ -216,6 +216,11 @@ li.active {
     text-align: center;
 }
 
+#main-markdown-view pre {
+    max-height: 600px;
+    overflow: auto;
+}
+
 .markdown-body ul, .markdown-body ol {
     padding-left: 20px;
 }

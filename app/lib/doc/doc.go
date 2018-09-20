@@ -48,6 +48,7 @@ func SearchMdByKey(key string) []string {
             paths, _ := gfile.ScanDir(docPath, "*.md", true)
             return paths
         }, 0)
+        // 遍历markdown文件列表，执行字符串搜索
         for _, path := range gconv.Strings(paths) {
             content := gfcache.GetContents(path)
             if len(content) > 0 {
