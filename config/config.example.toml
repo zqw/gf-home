@@ -16,3 +16,7 @@
     [doc.admin]
         user = "admin"
         pass = "123"
+# CDN配置
+[cdn]
+    url     = "http://gf.cdn.johng.cn"
+    version = "v=1"
