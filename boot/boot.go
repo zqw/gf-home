@@ -16,7 +16,7 @@ func init() {
     v.AddPath("static/template")
 
     // glog配置
-    logpath := c.GetString("setting.logpath")
+    logpath := c.GetString("logpath")
     glog.SetPath(logpath)
     glog.SetStdPrint(true)
 
@@ -28,6 +28,8 @@ func init() {
     s.SetLogPath(logpath)
     s.SetErrorLogEnabled(true)
     s.SetAccessLogEnabled(true)
-    s.SetPort(9999)
+    s.EnableHTTPS(c.GetString("ssl.crt"), c.GetString("ssl.key"))
+    s.SetHTTPSPort(443)
+    s.SetPort(80)
 }
 
