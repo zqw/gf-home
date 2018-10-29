@@ -38,12 +38,14 @@ func init() {
     g.Server("doc").BindHookHandler("/*", ghttp.HOOK_BEFORE_OUTPUT, func(r *ghttp.Request) {
         // 对所有动态内容执行替换
         if !r.IsFileServe() {
-            pattern := `(src|href)=["'](\/.+\.(js|css|png|jpg|jpeg|gif|font|ico).*?)["']`
-            b, _    := gregex.Replace(pattern,
-                []byte(fmt.Sprintf(`$1="https://%s$2"`, g.Config().GetString("cdn.url"))),
-                r.Response.Buffer(),
-            )
-            r.Response.SetBuffer(b)
+            if url := g.Config().GetString("cdn.url"); url != "" {
+                pattern := `(src|href)=["'](\/.+\.(js|css|png|jpg|jpeg|gif|font|ico).*?)["']`
+                b, _    := gregex.Replace(pattern,
+                    []byte(fmt.Sprintf(`$1="%s$2"`, url)),
+                    r.Response.Buffer(),
+                )
+                r.Response.SetBuffer(b)
+            }
         }
     })
 }
