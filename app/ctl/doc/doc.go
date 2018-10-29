@@ -1,12 +1,11 @@
 package ctlDoc
 
 import (
-    "gitee.com/johng/gf/g/net/ghttp"
-    "gitee.com/johng/gf/g"
-    "gitee.com/johng/gf/g/os/gfile"
-    "gitee.com/johng/gf/g/os/gview"
     "gitee.com/johng/gf-home/app/lib/doc"
+    "gitee.com/johng/gf/g"
     "gitee.com/johng/gf/g/encoding/gjson"
+    "gitee.com/johng/gf/g/net/ghttp"
+    "gitee.com/johng/gf/g/os/gfile"
     "net/http"
 )
 
@@ -41,9 +40,9 @@ func Index(r *ghttp.Request) {
     r.Response.WriteTpl("doc/index.html", g.Map {
         "title"               : title,
         "baseTitle"           : baseTitle,
-        "mdMenuContentParsed" : gview.HTML(libDoc.GetParsed("menus")),
-        "mdMainContentParsed" : gview.HTML(mdMainContentParsed),
-        "mdMainContent"       : gview.HTML(mdMainContent),
+        "mdMenuContentParsed" : libDoc.GetParsed("menus"),
+        "mdMainContentParsed" : mdMainContentParsed,
+        "mdMainContent"       : mdMainContent,
     })
 }
 
