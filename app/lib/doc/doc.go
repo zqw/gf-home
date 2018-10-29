@@ -142,12 +142,12 @@ func ParseMarkdown(content string) string {
         return ""
     }
     content    = string(blackfriday.Run([]byte(content)))
-    pattern   := `href="(.+?)"`
+    pattern   := `(src|href)=["'](.+?)["']`
     content, _ = gregex.ReplaceStringFunc(pattern, content, func(s string) string {
         match, _ := gregex.MatchString(pattern, gstr.Replace(s, ".md", ""))
         if len(match) > 1 {
-            if match[1][0] != '/' && match[1][0] != '#' && !strings.Contains(match[1], "://") {
-                return fmt.Sprintf(`href="/%s"`, match[1])
+            if match[2][0] != '/' && match[2][0] != '#' && !strings.Contains(match[2], "://") {
+                return fmt.Sprintf(`%s="/%s"`, match[1], match[2])
             }
         }
         return s
