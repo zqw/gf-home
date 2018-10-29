@@ -28,8 +28,10 @@ func init() {
     s.SetLogPath(logpath)
     s.SetErrorLogEnabled(true)
     s.SetAccessLogEnabled(true)
-    s.EnableHTTPS(c.GetString("ssl.crt"), c.GetString("ssl.key"))
-    s.SetHTTPSPort(443)
-    s.SetPort(80)
+    if c.Get("ssl") != nil {
+        s.EnableHTTPS(c.GetString("ssl.crt"), c.GetString("ssl.key"))
+        s.SetHTTPSPort(c.GetInt("https-port"))
+    }
+    s.SetPort(c.GetInt("http-port"))
 }
 

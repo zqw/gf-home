@@ -5,11 +5,11 @@
     <title>{{.title}}</title>
     <meta name="description" content="{{.Config.description}}"/>
     <meta name="keywords" content="{{.Config.keywords}}"/>
-    <link rel="stylesheet" href="{{.Config.cdn.url}}/static/plugin/amazeui-2.7.2/css/amazeui.min.css">
-    <link rel="stylesheet" href="{{.Config.cdn.url}}/static/plugin/markdown-css/github-markdown.css">
-    <link rel="stylesheet" href="{{.Config.cdn.url}}/static/plugin/prism/prism.css">
-    <link rel="stylesheet" href="{{.Config.cdn.url}}/static/resource/css/doc/style.css?{{.Config.cdn.version}}">
-    <link rel="icon" href="{{.Config.cdn.url}}/static/resource/image/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/plugin/amazeui-2.7.2/css/amazeui.min.css">
+    <link rel="stylesheet" href="/static/plugin/markdown-css/github-markdown.css">
+    <link rel="stylesheet" href="/static/plugin/prism/prism.css">
+    <link rel="stylesheet" href="/static/resource/css/doc/style.css?{{.Config.cdn.version|html}}">
+    <link rel="icon" href="/static/resource/image/favicon.ico" type="image/x-icon">
     <script type="application/javascript">
         var baseTitle = "{{.baseTitle}}"
     </script>
@@ -61,14 +61,14 @@
 
 
 
-<script src="{{.Config.cdn.url}}/static/plugin/jquery/3.3.1/jquery.min.js"></script>
-<script src="{{.Config.cdn.url}}/static/plugin/marked/marked.min.js"></script>
-<script src="{{.Config.cdn.url}}/static/plugin/md-toc/md-toc.min.js"></script>
-<script src="{{.Config.cdn.url}}/static/plugin/prism/prism.js"></script>
-<script src="{{.Config.cdn.url}}/static/plugin/amazeui-2.7.2/js/amazeui.min.js"></script>
-<script src="{{.Config.cdn.url}}/static/plugin/amazeui-2.7.2/js/amazeui.ie8polyfill.min.js"></script>
-<script src="{{.Config.cdn.url}}/static/plugin/amazeui-2.7.2/js/amazeui.widgets.helper.min.js"></script>
-<script src="{{.Config.cdn.url}}/static/resource/js/doc/index.js?{{.Config.cdn.version}}"></script>
+<script src="/static/plugin/jquery/3.3.1/jquery.min.js"></script>
+<script src="/static/plugin/marked/marked.min.js"></script>
+<script src="/static/plugin/md-toc/md-toc.min.js"></script>
+<script src="/static/plugin/prism/prism.js"></script>
+<script src="/static/plugin/amazeui-2.7.2/js/amazeui.min.js"></script>
+<script src="/static/plugin/amazeui-2.7.2/js/amazeui.ie8polyfill.min.js"></script>
+<script src="/static/plugin/amazeui-2.7.2/js/amazeui.widgets.helper.min.js"></script>
+<script src="/static/resource/js/doc/index.js?{{.Config.cdn.version|html}}"></script>
 
 </body>
 </html>
