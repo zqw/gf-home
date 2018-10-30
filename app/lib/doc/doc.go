@@ -126,25 +126,8 @@ func GetTitleByPath(path string) string {
 
 // 获得指定uri路径的markdown文件内容
 func GetMarkdown(path string) string {
-    mdRoot    := g.Config().GetString("doc.path")
-    content   := gfcache.GetContents(mdRoot + gfile.Separator + path + ".md")
-    pattern   := `\[(.*)\]\((.+?)\)`
-    content, _ = gregex.ReplaceStringFunc(pattern, content, func(s string) string {
-        match, _ := gregex.MatchString(pattern, s)
-        if len(match) > 1 {
-            url := match[2]
-            // 替换为绝对路径
-            if url[0] != '/' && url[0] != '#' && !strings.Contains(url, "://") {
-                url = fmt.Sprintf(`/%s`, url)
-            }
-            // 去掉markdown连接的后缀名称
-            if strings.EqualFold(gfile.Ext(url), ".md") {
-                url = gstr.Replace(url, ".md", "")
-            }
-            return fmt.Sprintf(`[%s](%s)`, match[1], url)
-        }
-        return s
-    })
+    mdRoot  := g.Config().GetString("doc.path")
+    content := gfcache.GetContents(mdRoot + gfile.Separator + path + ".md")
     return content
 }
 
@@ -158,5 +141,17 @@ func ParseMarkdown(content string) string {
     if content == "" {
         return ""
     }
-    return string(blackfriday.Run([]byte(content)))
+    // src及href 替换为/xxx模式的绝对连接
+    content    = string(blackfriday.Run([]byte(content)))
+    pattern   := `(src|href)=["'](.+?)["']`
+    content, _ = gregex.ReplaceStringFunc(pattern, content, func(s string) string {
+        match, _ := gregex.MatchString(pattern, gstr.Replace(s, ".md", ""))
+        if len(match) > 1 {
+            if match[2][0] != '/' && match[2][0] != '#' && !strings.Contains(match[2], "://") {
+                return fmt.Sprintf(`%s="/%s"`, match[1], match[2])
+            }
+        }
+        return s
+    })
+    return content
 }

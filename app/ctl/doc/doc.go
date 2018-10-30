@@ -17,7 +17,11 @@ func Index(r *ghttp.Request) {
     }
     path := r.Get("path")
     if path == "" {
-        r.Response.RedirectTo("/index")
+        if r.URL.RawQuery != "" {
+            r.Response.RedirectTo("/index?" + r.URL.RawQuery)
+        } else {
+            r.Response.RedirectTo("/index")
+        }
         return
     }
     config := g.Config()
