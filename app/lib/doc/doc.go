@@ -140,14 +140,6 @@ func GetMarkdown(path string) string {
             // 去掉markdown连接的后缀名称
             if strings.EqualFold(gfile.Ext(url), ".md") {
                 url = gstr.Replace(url, ".md", "")
-            } else if url[0] == '/' {
-                // 替换为CDN加速地址
-                if cdn := g.Config().GetString("cdn.url"); cdn != "" {
-                    url, _  = gregex.ReplaceString(`(\/.+\.(js|css|png|jpg|jpeg|gif|font|ico).*?)`,
-                        fmt.Sprintf(`%s$1`, cdn),
-                        url,
-                    )
-                }
             }
             return fmt.Sprintf(`[%s](%s)`, match[1], url)
         }

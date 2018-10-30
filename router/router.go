@@ -5,7 +5,6 @@ import (
     "gitee.com/johng/gf-home/app/ctl/doc"
     "gitee.com/johng/gf/g"
     "gitee.com/johng/gf/g/net/ghttp"
-    "gitee.com/johng/gf/g/util/gregex"
 )
 
 // 统一路由注册.
@@ -32,20 +31,6 @@ func init() {
         if !r.IsFileServe() && r.TLS == nil {
             r.Response.RedirectTo(fmt.Sprintf("https://%s%s", r.Host, r.URL.String()))
             r.Exit()
-        }
-    })
-    // 所有静态文件使用CDN加速
-    g.Server("doc").BindHookHandler("/*", ghttp.HOOK_BEFORE_OUTPUT, func(r *ghttp.Request) {
-        // 对所有动态内容执行替换
-        if !r.IsFileServe() {
-            if url := g.Config().GetString("cdn.url"); url != "" {
-                pattern := `(src|href)=["'](\/.+\.(js|css|png|jpg|jpeg|gif|font|ico).*?)["']`
-                b, _    := gregex.Replace(pattern,
-                    []byte(fmt.Sprintf(`$1="%s$2"`, url)),
-                    r.Response.Buffer(),
-                )
-                r.Response.SetBuffer(b)
-            }
         }
     })
 }
