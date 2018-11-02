@@ -1,19 +1,19 @@
-package libDoc
+package document
 
 import (
-    "gitee.com/johng/gf/g/os/gfile"
-    "gopkg.in/russross/blackfriday.v2"
-    "gitee.com/johng/gf/g"
-    "gitee.com/johng/gf/g/util/gregex"
     "fmt"
-    "strings"
-    "gitee.com/johng/gf/g/util/gstr"
-    "gitee.com/johng/gf/g/os/gfcache"
-    "gitee.com/johng/gf/g/os/gcache"
-    "gitee.com/johng/gf/g/os/gproc"
-    "gitee.com/johng/gf/g/os/glog"
+    "gitee.com/johng/gf/g"
     "gitee.com/johng/gf/g/container/garray"
+    "gitee.com/johng/gf/g/os/gcache"
+    "gitee.com/johng/gf/g/os/gfcache"
+    "gitee.com/johng/gf/g/os/gfile"
+    "gitee.com/johng/gf/g/os/glog"
+    "gitee.com/johng/gf/g/os/gproc"
     "gitee.com/johng/gf/g/util/gconv"
+    "gitee.com/johng/gf/g/util/gregex"
+    "gitee.com/johng/gf/g/util/gstr"
+    "gopkg.in/russross/blackfriday.v2"
+    "strings"
 )
 
 var (

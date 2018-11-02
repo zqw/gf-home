@@ -1,7 +1,7 @@
-package ctlDoc
+package document
 
 import (
-    "gitee.com/johng/gf-home/app/lib/doc"
+    "gitee.com/johng/gf-home/app/library/document"
     "gitee.com/johng/gf/g"
     "gitee.com/johng/gf/g/encoding/gjson"
     "gitee.com/johng/gf/g/net/ghttp"
@@ -33,18 +33,18 @@ func Index(r *ghttp.Request) {
     }
     // 菜单内容
     baseTitle := config.GetString("doc.title")
-    title     := libDoc.GetTitleByPath(path)
+    title     := document.GetTitleByPath(path)
     if title == "" {
         title = "404 NOT FOUND"
     }
     title += " - " + config.GetString("doc.title")
     // markdown内容
-    mdMainContent       := libDoc.GetMarkdown(path)
-    mdMainContentParsed := libDoc.ParseMarkdown(mdMainContent)
-    r.Response.WriteTpl("doc/index.html", g.Map {
+    mdMainContent       := document.GetMarkdown(path)
+    mdMainContentParsed := document.ParseMarkdown(mdMainContent)
+    r.Response.WriteTpl("document/index.html", g.Map {
         "title"               : title,
         "baseTitle"           : baseTitle,
-        "mdMenuContentParsed" : libDoc.GetParsed("menus"),
+        "mdMenuContentParsed" : document.GetParsed("menus"),
         "mdMainContentParsed" : mdMainContentParsed,
         "mdMainContent"       : mdMainContent,
     })
@@ -58,7 +58,7 @@ func UpdateHook(r *ghttp.Request) {
         panic(err)
     }
     if j != nil && j.GetString("password") == g.Config().GetString("doc.hook") {
-        libDoc.UpdateDocGit()
+        document.UpdateDocGit()
     }
     r.Response.Write("ok")
 }
@@ -68,7 +68,7 @@ func Search(r *ghttp.Request) {
     r.Response.WriteJson(g.Map{
         "code" : 1,
         "msg"  : "",
-        "data" : libDoc.SearchMdByKey(r.GetString("key")),
+        "data" : document.SearchMdByKey(r.GetString("key")),
     })
 }
 
@@ -77,6 +77,6 @@ func serveMarkdownAjax(r *ghttp.Request) {
     r.Response.WriteJson(g.Map{
         "code" : 1,
         "msg"  : "",
-        "data" : libDoc.GetMarkdown(r.Get("path", "index")),
+        "data" : document.GetMarkdown(r.Get("path", "index")),
     })
 }

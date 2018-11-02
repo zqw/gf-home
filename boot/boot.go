@@ -5,11 +5,17 @@ import (
     "gitee.com/johng/gf/g/os/glog"
 )
 
-// 用于应用初始化。
+// 管理初始化顺序.
 func init() {
+    initConfig()
+    initRouter()
+}
+
+// 用于配置初始化.
+func initConfig() {
     v := g.View()
     c := g.Config()
-    s := g.Server("doc")
+    s := g.Server()
 
     // 配置对象及视图对象配置
     c.AddPath("config")
