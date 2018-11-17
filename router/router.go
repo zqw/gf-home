@@ -1,21 +1,17 @@
-package boot
+package router
 
 import (
-    "gitee.com/johng/gf-home/app/controller/community"
     "gitee.com/johng/gf-home/app/controller/document"
     "gitee.com/johng/gf/g"
     "gitee.com/johng/gf/g/net/ghttp"
 )
 
-// 统一路由注册.
-func initRouter() {
+// 路由注册.
+func init() {
     // 开发文档
-    g.Server().BindHandler("/*path",    document.Index)
-    g.Server().BindHandler("/hook",     document.UpdateHook)
-    g.Server().BindHandler("/search",   document.Search)
-
-    // 社区模块
-    g.Server().BindObject("/community", new(community.Community))
+    g.Server().BindHandler("/*path",    ctl_document.Index)
+    g.Server().BindHandler("/hook",     ctl_document.UpdateHook)
+    g.Server().BindHandler("/search",   ctl_document.Search)
 
     // 管理接口
     g.Server().EnableAdmin("/admin")
@@ -42,3 +38,4 @@ func initRouter() {
     //    }
     //})
 }
+

@@ -13,7 +13,7 @@ gitpush.sh
 pkg/
 bin/
 cbuild
-*/.DS_Store
+**/.DS_Store
 config/config.toml
 gf-home
 main

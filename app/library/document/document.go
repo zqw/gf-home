@@ -1,4 +1,4 @@
-package document
+package lib_document
 
 import (
     "fmt"

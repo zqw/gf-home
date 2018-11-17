@@ -5,14 +5,8 @@ import (
     "gitee.com/johng/gf/g/os/glog"
 )
 
-// 管理初始化顺序.
-func init() {
-    initConfig()
-    initRouter()
-}
-
 // 用于配置初始化.
-func initConfig() {
+func init() {
     v := g.View()
     c := g.Config()
     s := g.Server()

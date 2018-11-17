@@ -1,4 +1,4 @@
-package community
+package ctl_community
 
 import (
     "gitee.com/johng/gf/g/net/ghttp"
