@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{.Config.cdn.url}}/static/plugin/amazeui-2.7.2/css/amazeui.min.css">
     <link rel="stylesheet" href="{{.Config.cdn.url}}/static/plugin/markdown-css/github-markdown.css">
     <link rel="stylesheet" href="{{.Config.cdn.url}}/static/plugin/prism/prism.css">
-    <link rel="stylesheet" href="{{.Config.cdn.url}}/static/resource/css/doc/style.css?{{.Config.cdn.version}}">
+    <link rel="stylesheet" href="{{.Config.cdn.url}}/static/resource/css/document/style.css?{{.Config.cdn.version}}">
     <link rel="icon" href="{{.Config.cdn.url}}/static/resource/image/favicon.ico" type="image/x-icon">
     <script type="application/javascript">
         var baseTitle = "{{.baseTitle}}"
@@ -18,7 +18,6 @@
 <div class="ui inverted active dimmer" id="process-mask">
     <div class="ui massive loading"></div>
 </div>
-
 
 <div class="container">
     <a id="menu-icon" href="#" title="打开/隐藏菜单"><i class="am-icon-align-justify am-icon-sm"></i></a>
@@ -52,7 +51,7 @@
     {{if ne .mdMainContent ""}}
         {{.mdMainContentParsed}}
     {{else}}
-        {{include "doc/include/404.html" .}}
+        {{include "document/include/404.html" .}}
     {{end}}
     </div>
     <div id="main-markdown-toc" style="display:none;"></div>
@@ -67,7 +66,7 @@
 <script src="{{.Config.cdn.url}}/static/plugin/amazeui-2.7.2/js/amazeui.min.js"></script>
 <script src="{{.Config.cdn.url}}/static/plugin/amazeui-2.7.2/js/amazeui.ie8polyfill.min.js"></script>
 <script src="{{.Config.cdn.url}}/static/plugin/amazeui-2.7.2/js/amazeui.widgets.helper.min.js"></script>
-<script src="{{.Config.cdn.url}}/static/resource/js/doc/index.js?{{.Config.cdn.version}}"></script>
+<script src="{{.Config.cdn.url}}/static/resource/js/document/index.js?{{.Config.cdn.version}}"></script>
 
 {{if get "jump"}}
     <div class="am-modal am-modal-alert" tabindex="-1" id="greeting-modal">

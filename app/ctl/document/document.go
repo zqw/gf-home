@@ -1,7 +1,7 @@
 package ctl_document
 
 import (
-    "gitee.com/johng/gf-home/app/library/document"
+    "gitee.com/johng/gf-home/app/lib/document"
     "gitee.com/johng/gf/g"
     "gitee.com/johng/gf/g/encoding/gjson"
     "gitee.com/johng/gf/g/net/ghttp"

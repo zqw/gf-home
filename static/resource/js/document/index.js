@@ -137,9 +137,9 @@ $(function() {
     });
     $("#main-markdown-view").scroll(function() {
         if ($(this).scrollTop() >= 400) {
-          $("#totop-icon").show();
+            $("#totop-icon").show();
         } else {
-          $("#totop-icon").hide();
+            $("#totop-icon").hide();
         }
     });
     // 菜单树形结构处理

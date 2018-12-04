@@ -1,12 +1,12 @@
 package router
 
 import (
-    "gitee.com/johng/gf-home/app/controller/document"
-    "gitee.com/johng/gf/g"
+    "gitee.com/johng/gf-home/app/ctl/document"
     "gitee.com/johng/gf/g/net/ghttp"
+    "gitee.com/johng/gf/g"
 )
 
-// 路由注册.
+// 统一路由注册.
 func init() {
     // 开发文档
     g.Server().BindHandler("/*path",    ctl_document.Index)
@@ -38,4 +38,3 @@ func init() {
     //    }
     //})
 }
-
