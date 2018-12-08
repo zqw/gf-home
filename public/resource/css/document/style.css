@@ -211,7 +211,7 @@ li.active {
     transition: left .25s ease;
     flex:1;
     height: 100vh;
-    padding: 20px 80px 150px 80px;
+    padding: 20px 80px 10px 80px;
     overflow: auto;
 }
 
@@ -244,4 +244,12 @@ li.active {
 
 #side-markdown-view i.empty-i {
     padding-right: 17px;
+}
+
+/* bottom */
+#powered-bottom {
+    font-size:14px;
+    margin:100px 0 20px 0;
+    height:30px;
+    text-align: center;
 }

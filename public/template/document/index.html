@@ -5,11 +5,11 @@
     <title>{{.title}}</title>
     <meta name="description" content="{{.Config.description}}"/>
     <meta name="keywords" content="{{.Config.keywords}}"/>
-    <link rel="stylesheet" href="{{.Config.cdn.url}}/static/plugin/amazeui-2.7.2/css/amazeui.min.css">
-    <link rel="stylesheet" href="{{.Config.cdn.url}}/static/plugin/markdown-css/github-markdown.css">
-    <link rel="stylesheet" href="{{.Config.cdn.url}}/static/plugin/prism/prism.css">
-    <link rel="stylesheet" href="{{.Config.cdn.url}}/static/resource/css/document/style.css?{{.Config.cdn.version}}">
-    <link rel="icon" href="{{.Config.cdn.url}}/static/resource/image/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{{.Config.cdn.url}}/public/plugin/amazeui-2.7.2/css/amazeui.min.css">
+    <link rel="stylesheet" href="{{.Config.cdn.url}}/public/plugin/markdown-css/github-markdown.css">
+    <link rel="stylesheet" href="{{.Config.cdn.url}}/public/plugin/prism/prism.css">
+    <link rel="stylesheet" href="{{.Config.cdn.url}}/public/resource/css/document/style.css?{{.Config.cdn.version}}">
+    <link rel="icon" href="{{.Config.cdn.url}}/public/resource/image/favicon.ico" type="image/x-icon">
     <script type="application/javascript">
         var baseTitle = "{{.baseTitle}}"
     </script>
@@ -55,18 +55,21 @@
     {{end}}
     </div>
     <div id="main-markdown-toc" style="display:none;"></div>
+    <div id="powered" style="display:none;">
+        <div id="powered-bottom">Powered by <a href="https://gitee.com/johng/gf" target="_blank">GoFrame {{.GF.version}}</a></div>
+    </div>
     <textarea id="main-markdown-content" style="display:none;">{{.mdMainContent}}</textarea>
 </div>
 
 
-<script src="{{.Config.cdn.url}}/static/plugin/jquery/3.3.1/jquery.min.js"></script>
-<script src="{{.Config.cdn.url}}/static/plugin/marked/marked.min.js"></script>
-<script src="{{.Config.cdn.url}}/static/plugin/md-toc/md-toc.min.js"></script>
-<script src="{{.Config.cdn.url}}/static/plugin/prism/prism.js"></script>
-<script src="{{.Config.cdn.url}}/static/plugin/amazeui-2.7.2/js/amazeui.min.js"></script>
-<script src="{{.Config.cdn.url}}/static/plugin/amazeui-2.7.2/js/amazeui.ie8polyfill.min.js"></script>
-<script src="{{.Config.cdn.url}}/static/plugin/amazeui-2.7.2/js/amazeui.widgets.helper.min.js"></script>
-<script src="{{.Config.cdn.url}}/static/resource/js/document/index.js?{{.Config.cdn.version}}"></script>
+<script src="{{.Config.cdn.url}}/public/plugin/jquery/3.3.1/jquery.min.js"></script>
+<script src="{{.Config.cdn.url}}/public/plugin/marked/marked.min.js"></script>
+<script src="{{.Config.cdn.url}}/public/plugin/md-toc/md-toc.min.js"></script>
+<script src="{{.Config.cdn.url}}/public/plugin/prism/prism.js"></script>
+<script src="{{.Config.cdn.url}}/public/plugin/amazeui-2.7.2/js/amazeui.min.js"></script>
+<script src="{{.Config.cdn.url}}/public/plugin/amazeui-2.7.2/js/amazeui.ie8polyfill.min.js"></script>
+<script src="{{.Config.cdn.url}}/public/plugin/amazeui-2.7.2/js/amazeui.widgets.helper.min.js"></script>
+<script src="{{.Config.cdn.url}}/public/resource/js/document/index.js?{{.Config.cdn.version}}"></script>
 
 {{if get "jump"}}
     <div class="am-modal am-modal-alert" tabindex="-1" id="greeting-modal">

@@ -73,7 +73,8 @@ function reloadMainMarkdown() {
             'targetId': 'main-markdown-toc'
         } );
         if ($('#main-markdown-toc').html().length > 0) {
-            var html = $("#main-markdown-view").html().replace("<p>[TOC]</p>", $('#main-markdown-toc').html())
+            var html = $("#main-markdown-view").html().replace("<p>[TOC]</p>", $('#main-markdown-toc').html());
+            html += $("#powered").html();
             $("#main-markdown-view").html(html)
         }
     }
@@ -186,11 +187,11 @@ $(function() {
         }
     });
     // 默认将第一级菜单展开
-    $("#side-markdown-view").find("ul").eq(0).find(">li").each(function () {
-        if ($(this).find("ul").length > 0) {
-            $(this).trigger("click")
-        }
-    });
+    // $("#side-markdown-view").find("ul").eq(0).find(">li").each(function () {
+    //     if ($(this).find("ul").length > 0) {
+    //         $(this).trigger("click")
+    //     }
+    // });
     // 高亮并展开当前打开的地址
     highlightLiByUri(window.location.pathname);
 

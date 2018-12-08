@@ -24,7 +24,7 @@ var (
 // 更新doc版本库
 func UpdateDocGit() {
     err := gproc.ShellRun(
-        fmt.Sprintf(`cd %s && git pull origin master`, g.Config().GetString("doc.path")),
+        fmt.Sprintf(`cd %s && git pull origin master`, g.Config().GetString("document.path")),
     )
     if err == nil {
         // 每次文档的更新都要清除缓存对象数据
@@ -42,7 +42,7 @@ func SearchMdByKey(key string) []string {
     v := cache.GetOrSetFunc("doc_search_result_" + key, func() interface{} {
         // 当该key的检索缓存不存在时，执行检索
         array    := garray.NewStringArray(0, 0, false)
-        docPath  := g.Config().GetString("doc.path")
+        docPath  := g.Config().GetString("document.path")
         paths    := cache.GetOrSetFunc("doc_files_recursive", func() interface{} {
             // 当目录列表不存在时，执行检索
             paths, _ := gfile.ScanDir(docPath, "*.md", true)
@@ -126,7 +126,7 @@ func GetTitleByPath(path string) string {
 
 // 获得指定uri路径的markdown文件内容
 func GetMarkdown(path string) string {
-    mdRoot  := g.Config().GetString("doc.path")
+    mdRoot  := g.Config().GetString("document.path")
     content := gfcache.GetContents(mdRoot + gfile.Separator + path + ".md")
     return content
 }

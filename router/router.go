@@ -23,8 +23,8 @@ func init() {
 
     // 为平滑重启管理页面设置HTTP Basic账号密码
     g.Server().BindHookHandler("/admin/*", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {
-        user := g.Config().GetString("doc.admin.user")
-        pass := g.Config().GetString("doc.admin.pass")
+        user := g.Config().GetString("admin.user")
+        pass := g.Config().GetString("admin.pass")
         if !r.BasicAuth(user, pass) {
             r.Exit()
         }

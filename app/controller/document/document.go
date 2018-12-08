@@ -32,12 +32,12 @@ func Index(r *ghttp.Request) {
         return
     }
     // 菜单内容
-    baseTitle := config.GetString("doc.title")
+    baseTitle := config.GetString("document.title")
     title     := lib_document.GetTitleByPath(path)
     if title == "" {
         title = "404 NOT FOUND"
     }
-    title += " - " + config.GetString("doc.title")
+    title += " - " + config.GetString("document.title")
     // markdown内容
     mdMainContent       := lib_document.GetMarkdown(path)
     mdMainContentParsed := lib_document.ParseMarkdown(mdMainContent)
@@ -57,7 +57,7 @@ func UpdateHook(r *ghttp.Request) {
     if err != nil {
         panic(err)
     }
-    if j != nil && j.GetString("password") == g.Config().GetString("doc.hook") {
+    if j != nil && j.GetString("password") == g.Config().GetString("document.hook") {
         lib_document.UpdateDocGit()
     }
     r.Response.Write("ok")

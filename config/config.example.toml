@@ -4,23 +4,21 @@ description = "模块化、松耦合、轻量级、高性能的Go语言Web开发
 http-port   = 80
 https-port  = 443
 
-# https设置
+# WebServer管理
+[admin]
+    user = "admin"
+    pass = "123"
+
+# HTTPS证书设置
 [ssl]
     key = "/home/john/Workspace/Go/gf-home/config/ssl/ssl.key"
     crt = "/home/john/Workspace/Go/gf-home/config/ssl/ssl.crt"
 
-# 官网首页设置
-[index]
-    title = "官方网站 - GoFrame开发框架"
-
 # 开发文档设置
-[doc]
+[document]
     title = "GoFrame框架开发文档 - Powered by GoFrame"
     path  = "/home/john/Workspace/Go/gf-doc2"
     hook  = "pass"
-    [doc.admin]
-        user = "admin"
-        pass = "123"
 
 # CDN配置
 [cdn]

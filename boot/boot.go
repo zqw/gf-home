@@ -11,20 +11,16 @@ func init() {
     c := g.Config()
     s := g.Server()
 
-    // 配置对象及视图对象配置
+    // 配置及视图对象
     c.AddPath("config")
-    v.AddPath("static/template")
+    v.AddPath("public/template")
 
-    // glog配置
+    // 日志模块配置
     logpath := c.GetString("logpath")
     glog.SetPath(logpath)
     glog.SetStdPrint(true)
 
     // Web Server配置
-    s.AddSearchPath(c.GetString("doc.path"))
-    s.SetDenyRoutes([]string{
-        "/config/*",
-    })
     s.SetLogPath(logpath)
     s.SetErrorLogEnabled(true)
     s.SetAccessLogEnabled(true)
@@ -32,6 +28,8 @@ func init() {
         s.EnableHTTPS(c.GetString("ssl.crt"), c.GetString("ssl.key"))
         s.SetHTTPSPort(c.GetInt("https-port"))
     }
+    s.AddSearchPath("./")
+    s.AddSearchPath(c.GetString("document.path"))
     s.SetPort(c.GetInt("http-port"))
 }
 
