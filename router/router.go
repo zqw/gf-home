@@ -17,9 +17,7 @@ func init() {
     g.Server().EnableAdmin("/admin")
 
     // 某些浏览器会直接请求/favicon.ico文件，会产生404
-    g.Server().BindHandler("/favicon.ico", func(r *ghttp.Request) {
-        r.Response.ServeFile("/static/resource/image/favicon.ico")
-    })
+    g.Server().SetRewrite("/favicon.ico", "/resource/image/favicon.ico")
 
     // 为平滑重启管理页面设置HTTP Basic账号密码
     g.Server().BindHookHandler("/admin/*", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {

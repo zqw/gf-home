@@ -28,7 +28,7 @@ func init() {
         s.EnableHTTPS(c.GetString("ssl.crt"), c.GetString("ssl.key"))
         s.SetHTTPSPort(c.GetInt("https-port"))
     }
-    s.AddSearchPath("./")
+    s.SetServerRoot("./public")
     s.AddSearchPath(c.GetString("document.path"))
     s.SetPort(c.GetInt("http-port"))
 }
