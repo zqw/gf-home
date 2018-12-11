@@ -1,6 +1,6 @@
 # GoFrame官网
 <div align=center>
-<img src="static/resource/image/cover.png" width="250"/>
+<img src="public/resource/image/cover.png" width="250"/>
 </div>
 
 ## GoFrame框架地址
