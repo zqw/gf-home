@@ -1,6 +1,7 @@
 package router
 
 import (
+    "fmt"
     "gitee.com/johng/gf-home/app/controller/document"
     "gitee.com/johng/gf/g"
     "gitee.com/johng/gf/g/net/ghttp"
@@ -29,10 +30,9 @@ func init() {
     })
 
     // 强制跳转到HTTPS访问
-    //g.Server().BindHookHandler("/*", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {
-    //    if !r.IsFileServe() && r.TLS == nil {
-    //        r.Response.RedirectTo(fmt.Sprintf("https://%s%s", r.Host, r.URL.String()))
-    //        r.Exit()
-    //    }
-    //})
+    g.Server().BindHookHandler("/*", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {
+       if !r.IsFileRequest() && r.TLS == nil {
+           r.Response.RedirectTo(fmt.Sprintf("https://%s%s", r.Host, r.URL.String()))
+       }
+    })
 }
