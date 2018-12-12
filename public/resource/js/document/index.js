@@ -54,7 +54,10 @@ function cancelAllHighlight() {
 function highlightLiByUri(uri) {
     var seli = $("a[href='"+ uri +"']").parent("li");
     seli.addClass("active");
-    openNode(seli.parent("ul").parent("li"));
+    // 层级打开节点
+    $("a[href='"+ uri +"']").parents("li").each(function(){
+        openNode($(this));
+    });
 }
 
 // 重新解析markdown内容
