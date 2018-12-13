@@ -13,7 +13,7 @@ func init() {
 
     // 配置及视图对象
     c.AddPath("config")
-    v.AddPath("public/template")
+    v.AddPath("template")
 
     // 日志模块配置
     logpath := c.GetString("logpath")
