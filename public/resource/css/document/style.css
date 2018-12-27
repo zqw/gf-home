@@ -216,7 +216,7 @@ li.active {
 }
 
 #main-markdown-view img {
-    display:block;
+    /*display:block;*/
     text-align: center;
 }
 
