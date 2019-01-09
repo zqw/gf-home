@@ -71,24 +71,5 @@
 <script src="{{.Config.cdn.url}}/plugin/amazeui-2.7.2/js/amazeui.widgets.helper.min.js"></script>
 <script src="{{.Config.cdn.url}}/resource/js/document/index.js?{{.Config.cdn.version}}"></script>
 
-{{if get "jump"}}
-    <div class="am-modal am-modal-alert" tabindex="-1" id="greeting-modal">
-        <div class="am-modal-dialog">
-            <div class="am-modal-hd">GREETINGS</div>
-            <div class="am-modal-bd">
-                从今天开始<code>GoFrame</code>框架启用全新域名<code>gfer.me</code>!
-            </div>
-            <div class="am-modal-footer">
-                <span class="am-modal-btn">哇噻真棒</span>
-            </div>
-        </div>
-    </div>
-    <script type="application/javascript">
-        $(function() {
-            $("#greeting-modal").modal();
-        });
-    </script>
-{{end}}
-
 </body>
 </html>
