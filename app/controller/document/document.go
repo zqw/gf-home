@@ -1,11 +1,11 @@
 package ctl_document
 
 import (
-    "gitee.com/johng/gf-home/app/library/document"
-    "gitee.com/johng/gf/g"
-    "gitee.com/johng/gf/g/encoding/gjson"
-    "gitee.com/johng/gf/g/net/ghttp"
-    "gitee.com/johng/gf/g/os/gfile"
+    "github.com/gogf/gf-home/app/library/document"
+    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/g/encoding/gjson"
+    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/g/os/gfile"
     "net/http"
 )
 

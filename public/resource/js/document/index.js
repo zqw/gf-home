@@ -87,7 +87,7 @@ function reloadMainMarkdown() {
 
 // 更新文档markdown链接地址
 function updateHelpUrl(uri) {
-    $("#help-icon").attr("href", "https://gitee.com/johng/gf-doc/tree/master" + uri + ".md");
+    $("#help-icon").attr("href", "https://github.com/gogf/gf-doc/tree/master" + uri + ".md");
 }
 
 // 修改当前标题

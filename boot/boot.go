@@ -1,8 +1,8 @@
 package boot
 
 import (
-    "gitee.com/johng/gf/g"
-    "gitee.com/johng/gf/g/os/glog"
+    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/g/os/glog"
 )
 
 // 用于配置初始化.

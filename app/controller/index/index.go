@@ -1,7 +1,7 @@
 package ctl_index
 
 import (
-	"gitee.com/johng/gf/g/net/ghttp"
+	"github.com/gogf/gf/g/net/ghttp"
 )
 
 // 网站首页

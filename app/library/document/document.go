@@ -2,16 +2,16 @@ package lib_document
 
 import (
     "fmt"
-    "gitee.com/johng/gf/g"
-    "gitee.com/johng/gf/g/container/garray"
-    "gitee.com/johng/gf/g/os/gcache"
-    "gitee.com/johng/gf/g/os/gfcache"
-    "gitee.com/johng/gf/g/os/gfile"
-    "gitee.com/johng/gf/g/os/glog"
-    "gitee.com/johng/gf/g/os/gproc"
-    "gitee.com/johng/gf/g/util/gconv"
-    "gitee.com/johng/gf/g/util/gregex"
-    "gitee.com/johng/gf/g/util/gstr"
+    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/g/container/garray"
+    "github.com/gogf/gf/g/os/gcache"
+    "github.com/gogf/gf/g/os/gfcache"
+    "github.com/gogf/gf/g/os/gfile"
+    "github.com/gogf/gf/g/os/glog"
+    "github.com/gogf/gf/g/os/gproc"
+    "github.com/gogf/gf/g/text/gregex"
+    "github.com/gogf/gf/g/text/gstr"
+    "github.com/gogf/gf/g/util/gconv"
     "gopkg.in/russross/blackfriday.v2"
     "strings"
 )
@@ -41,7 +41,7 @@ func SearchMdByKey(key string) []string {
     glog.Cat("search").Println(key)
     v := cache.GetOrSetFunc("doc_search_result_" + key, func() interface{} {
         // 当该key的检索缓存不存在时，执行检索
-        array    := garray.NewStringArray(0, 0, false)
+        array    := garray.NewStringArray(true)
         docPath  := g.Config().GetString("document.path")
         paths    := cache.GetOrSetFunc("doc_files_recursive", func() interface{} {
             // 当目录列表不存在时，执行检索
