@@ -22,5 +22,5 @@ https-port  = 443
 
 # CDN配置
 [cdn]
-    url     = "https://cdn.gfer.me"
+    url     = "https://cdn.goframe.org"
     version = "v=1"

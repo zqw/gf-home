@@ -1,15 +1,10 @@
-# GoFrame官网
+# GoFrame Documentation
 <div align=center>
-<img src="public/resource/image/cover.png" width="250"/>
+    <img src="public/resource/image/cover.png" width="200"/>
 </div>
 
-## GoFrame框架地址
+## GoFrame Repository
   * [https://github.com/gogf/gf](https://github.com/gogf/gf)
-  * [https://github.com/johng-cn/gf](https://github.com/johng-cn/gf)
 
-## GoFrame开发文档
-  * [gfer.me](https://gfer.me)
-
-## 官网镜像仓库地址
-  * [https://github.com/gogf/gf-home](https://github.com/gogf/gf-home)
-  * [https://github.com/johng-cn/gf-home](https://github.com/johng-cn/gf-home)
+## GoFrame Home Site
+  * [https://goframe.org](https://goframe.org)
