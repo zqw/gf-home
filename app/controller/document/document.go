@@ -3,7 +3,6 @@ package ctl_document
 import (
     "github.com/gogf/gf-home/app/library/document"
     "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/encoding/gjson"
     "github.com/gogf/gf/g/net/ghttp"
     "github.com/gogf/gf/g/os/gfile"
     "net/http"
@@ -52,15 +51,12 @@ func Index(r *ghttp.Request) {
 
 // 文档更新hook
 func UpdateHook(r *ghttp.Request) {
-    raw    := r.GetRaw()
-    j, err := gjson.DecodeToJson(raw)
-    if err != nil {
-        panic(err)
-    }
-    if j != nil && j.GetString("password") == g.Config().GetString("document.hook") {
+    if r.Get("password") == g.Config().GetString("document.hook") {
         lib_document.UpdateDocGit()
+        r.Response.Write("ok")
+    } else {
+        r.Response.WriteStatus(443)
     }
-    r.Response.Write("ok")
 }
 
 // 搜索文档

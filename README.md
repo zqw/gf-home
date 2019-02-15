@@ -4,7 +4,8 @@
 </div>
 
 ## GoFrame Repository
-  * [https://github.com/gogf/gf](https://github.com/gogf/gf)
+* [https://github.com/gogf/gf](https://github.com/gogf/gf)
+* [https://gitee.com/johng/gf](https://gitee.com/johng/gf)
 
-## GoFrame Home Site
-  * [https://goframe.org](https://goframe.org)
+## GoFrame Home
+* [https://goframe.org](https://goframe.org)
