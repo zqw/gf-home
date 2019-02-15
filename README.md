@@ -1,4 +1,4 @@
-# GoFrame Documentation
+# GoFrame
 <div align=center>
     <img src="public/resource/image/cover.png" width="200"/>
 </div>
