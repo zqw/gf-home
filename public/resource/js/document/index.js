@@ -71,7 +71,7 @@ function reloadMainMarkdown() {
         // 生成TOC菜单
         $('#main-markdown-toc').html("");
         new Toc('main-markdown-view', {
-            'level'   : 3,
+            'level'   : 4,
             'class'   : 'toc',
             'targetId': 'main-markdown-toc'
         } );
