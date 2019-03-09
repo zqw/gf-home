@@ -40,7 +40,7 @@ func Index(r *ghttp.Request) {
     // markdown内容
     mdMainContent       := lib_document.GetMarkdown(path)
     mdMainContentParsed := lib_document.ParseMarkdown(mdMainContent)
-    r.Response.WriteTpl("document/index.html", g.MapStrAny {
+    r.Response.WriteTpl("document/index.html", g.Map {
         "title"               : title,
         "baseTitle"           : baseTitle,
         "mdMenuContentParsed" : lib_document.GetParsed("menus"),
