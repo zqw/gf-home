@@ -1,7 +1,7 @@
-package ctl_document
+package api_document
 
 import (
-    "github.com/gogf/gf-home/app/library/document"
+    "github.com/gogf/gf-home/app/service/document"
     "github.com/gogf/gf/g"
     "github.com/gogf/gf/g/net/ghttp"
     "github.com/gogf/gf/g/os/gfile"
@@ -32,18 +32,18 @@ func Index(r *ghttp.Request) {
     }
     // 菜单内容
     baseTitle := config.GetString("document.title")
-    title     := lib_document.GetTitleByPath(path)
+    title     := svr_document.GetTitleByPath(path)
     if title == "" {
         title = "404 NOT FOUND"
     }
     title += " - " + config.GetString("document.title")
     // markdown内容
-    mdMainContent       := lib_document.GetMarkdown(path)
-    mdMainContentParsed := lib_document.ParseMarkdown(mdMainContent)
+    mdMainContent       := svr_document.GetMarkdown(path)
+    mdMainContentParsed := svr_document.ParseMarkdown(mdMainContent)
     r.Response.WriteTpl("document/index.html", g.Map {
         "title"               : title,
         "baseTitle"           : baseTitle,
-        "mdMenuContentParsed" : lib_document.GetParsed("menus"),
+        "mdMenuContentParsed" : svr_document.GetParsed("menus"),
         "mdMainContentParsed" : mdMainContentParsed,
         "mdMainContent"       : mdMainContent,
     })
@@ -52,7 +52,7 @@ func Index(r *ghttp.Request) {
 // 文档更新hook
 func UpdateHook(r *ghttp.Request) {
     if r.Get("password") == g.Config().GetString("document.hook") {
-        lib_document.UpdateDocGit()
+        svr_document.UpdateDocGit()
         r.Response.Write("ok")
     } else {
         r.Response.WriteStatus(443)
@@ -64,7 +64,7 @@ func Search(r *ghttp.Request) {
     r.Response.WriteJson(g.Map{
         "code" : 1,
         "msg"  : "",
-        "data" : lib_document.SearchMdByKey(r.GetString("key")),
+        "data" : svr_document.SearchMdByKey(r.GetString("key")),
     })
 }
 
@@ -73,6 +73,6 @@ func serveMarkdownAjax(r *ghttp.Request) {
     r.Response.WriteJson(g.Map{
         "code" : 1,
         "msg"  : "",
-        "data" : lib_document.GetMarkdown(r.Get("path", "index")),
+        "data" : svr_document.GetMarkdown(r.Get("path", "index")),
     })
 }

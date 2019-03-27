@@ -1,7 +1,7 @@
 package router
 
 import (
-    "github.com/gogf/gf-home/app/controller/document"
+    "github.com/gogf/gf-home/app/api/document"
     "github.com/gogf/gf/g"
     "github.com/gogf/gf/g/net/ghttp"
 )
@@ -9,9 +9,9 @@ import (
 // 统一路由注册.
 func init() {
     // 开发文档
-    g.Server().BindHandler("/*path",    ctl_document.Index)
-    g.Server().BindHandler("/hook",     ctl_document.UpdateHook)
-    g.Server().BindHandler("/search",   ctl_document.Search)
+    g.Server().BindHandler("/*path",    api_document.Index)
+    g.Server().BindHandler("/hook",     api_document.UpdateHook)
+    g.Server().BindHandler("/search",   api_document.Search)
 
     // 管理接口
     g.Server().EnableAdmin("/admin")
@@ -24,7 +24,7 @@ func init() {
         user := g.Config().GetString("admin.user")
         pass := g.Config().GetString("admin.pass")
         if !r.BasicAuth(user, pass) {
-            r.Exit()
+            r.ExitAll()
         }
     })
 

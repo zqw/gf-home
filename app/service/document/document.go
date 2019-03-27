@@ -1,4 +1,4 @@
-package lib_document
+package svr_document
 
 import (
     "fmt"

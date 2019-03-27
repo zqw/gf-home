@@ -1,4 +1,4 @@
-package ctl_index
+package api_index
 
 import (
 	"github.com/gogf/gf/g/net/ghttp"
