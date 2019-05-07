@@ -9,9 +9,9 @@ import (
 // 统一路由注册.
 func init() {
     // 开发文档
-    g.Server().BindHandler("/*path",    api_document.Index)
-    g.Server().BindHandler("/hook",     api_document.UpdateHook)
-    g.Server().BindHandler("/search",   api_document.Search)
+    g.Server().BindHandler("/*path",    a_document.Index)
+    g.Server().BindHandler("/hook",     a_document.UpdateHook)
+    g.Server().BindHandler("/search",   a_document.Search)
 
     // 管理接口
     g.Server().EnableAdmin("/admin")

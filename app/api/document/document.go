@@ -1,4 +1,4 @@
-package api_document
+package a_document
 
 import (
     "github.com/gogf/gf-home/app/service/document"
@@ -32,18 +32,18 @@ func Index(r *ghttp.Request) {
     }
     // 菜单内容
     baseTitle := config.GetString("document.title")
-    title     := svr_document.GetTitleByPath(path)
+    title     := s_document.GetTitleByPath(path)
     if title == "" {
         title = "404 NOT FOUND"
     }
     title += " - " + config.GetString("document.title")
     // markdown内容
-    mdMainContent       := svr_document.GetMarkdown(path)
-    mdMainContentParsed := svr_document.ParseMarkdown(mdMainContent)
+    mdMainContent       := s_document.GetMarkdown(path)
+    mdMainContentParsed := s_document.ParseMarkdown(mdMainContent)
     r.Response.WriteTpl("document/index.html", g.Map {
         "title"               : title,
         "baseTitle"           : baseTitle,
-        "mdMenuContentParsed" : svr_document.GetParsed("menus"),
+        "mdMenuContentParsed" : s_document.GetParsed("menus"),
         "mdMainContentParsed" : mdMainContentParsed,
         "mdMainContent"       : mdMainContent,
     })
@@ -52,7 +52,7 @@ func Index(r *ghttp.Request) {
 // 文档更新hook
 func UpdateHook(r *ghttp.Request) {
     if r.Get("password") == g.Config().GetString("document.hook") {
-        svr_document.UpdateDocGit()
+        s_document.UpdateDocGit()
         r.Response.Write("ok")
     } else {
         r.Response.WriteStatus(443)
@@ -64,7 +64,7 @@ func Search(r *ghttp.Request) {
     r.Response.WriteJson(g.Map{
         "code" : 1,
         "msg"  : "",
-        "data" : svr_document.SearchMdByKey(r.GetString("key")),
+        "data" : s_document.SearchMdByKey(r.GetString("key")),
     })
 }
 
@@ -73,6 +73,6 @@ func serveMarkdownAjax(r *ghttp.Request) {
     r.Response.WriteJson(g.Map{
         "code" : 1,
         "msg"  : "",
-        "data" : svr_document.GetMarkdown(r.Get("path", "index")),
+        "data" : s_document.GetMarkdown(r.Get("path", "index")),
     })
 }

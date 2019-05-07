@@ -1,4 +1,4 @@
-package svr_document
+package s_document
 
 import (
     "fmt"
@@ -17,6 +17,11 @@ import (
 )
 
 var (
+	// Markdown文件路径配置
+	Path = g.Config().GetString("document.path")
+)
+
+var (
     // 文档缓存
     cache = gcache.New()
 )
@@ -24,7 +29,7 @@ var (
 // 更新doc版本库
 func UpdateDocGit() {
     err := gproc.ShellRun(
-        fmt.Sprintf(`cd %s && git pull origin master`, g.Config().GetString("document.path")),
+        fmt.Sprintf(`cd %s && git pull origin master`, Path),
     )
     if err == nil {
         // 每次文档的更新都要清除缓存对象数据
@@ -126,9 +131,7 @@ func GetTitleByPath(path string) string {
 
 // 获得指定uri路径的markdown文件内容
 func GetMarkdown(path string) string {
-    mdRoot  := g.Config().GetString("document.path")
-    content := gfcache.GetContents(mdRoot + gfile.Separator + path + ".md")
-    return content
+    return gfcache.GetContents(Path + gfile.Separator + path + ".md")
 }
 
 // 获得解析为html的markdown文件内容
