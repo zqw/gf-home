@@ -21,9 +21,12 @@ function replaceHrefAndSrc() {
     $(document).find("a").each(function(){
         var href = $(this).attr("href");
         if (typeof href != "undefined" && href.length > 0) {
+            if (href.substr(0, 7) == "mailto:") {
+                return
+            }
             if (href.substr(0, 1) != "/" && href.substr(0, 1) != "#" && href.substr(0, 4) != "http") {
                 href = "/" + href
-                if (href.indexOf(".md")) {
+                if (href.indexOf(".md") != -1) {
                     href = href.replace(".md", "");
                     $(this).attr("href", "javascript:loadMarkdown('" + href + "', true);");
                 } else {
