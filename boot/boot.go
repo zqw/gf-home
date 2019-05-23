@@ -13,7 +13,7 @@ func init() {
     // 日志模块配置
     logpath := c.GetString("logpath")
     glog.SetPath(logpath)
-    glog.SetStdPrint(true)
+    glog.SetStdoutPrint(true)
 
     // Web Server配置
     s.SetLogPath(logpath)
