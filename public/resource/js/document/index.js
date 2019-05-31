@@ -62,20 +62,21 @@ function highlightLiByUri(uri) {
         openNode($(this));
     });
 }
-// 监听复制按钮
+
+// 监听按钮事件监听
 function copyBtnOn() {
     $('.copy-code').on('click',function() {
-        var span=$(this);
-        var id=span.attr("code-id");
-        var codeContent=$("#code-content-id-"+id);
-        if(copyText(codeContent.text())){
+        var span = $(this);
+        var id   = span.attr("code-id");
+        var codeContent = $("#code-content-id-"+id);
+        if (copyText(codeContent.text())) {
             span.css("color","green");
-        }else{
+        } else {
             span.css("color","red");
         }
         setTimeout(function(){
             span.css("color","");
-        },500);
+        }, 500);
     });
 }
 // 复制功能
@@ -118,10 +119,10 @@ function reloadMainMarkdown() {
             var codeContent=$("<span>").text(thisBlock.text()).attr("id","code-content-id-"+i);
             $("#code-list").append(codeContent);
             // 添加复制按钮，添加class用于事件监听
-            var copyBtn=$("<span>").attr({
-                "style":"position: absolute;right: 5px;top: 3px;cursor:pointer;user-select:none;",
-                "title":"copy",
-                "code-id":""+i
+            var copyBtn = $("<span>").attr({
+                "style"   : "position: absolute;right: 5px;top: 3px;cursor:pointer;user-select:none;",
+                "title"   : "copy",
+                "code-id" : "" + i
             }).addClass("copy-code");
             copyBtn.append($(`<i class="doc-act-clip am-icon-copy"></i>`));
             copyBtn.append("copy");
