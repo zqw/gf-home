@@ -62,13 +62,72 @@ function highlightLiByUri(uri) {
         openNode($(this));
     });
 }
+// 监听复制按钮
+function copyBtnOn() {
+    $('.copy-code').on('click',function() {
+        var span=$(this);
+        var id=span.attr("code-id");
+        var codeContent=$("#code-content-id-"+id);
+        if(copyText(codeContent.text())){
+            span.css("color","green");
+        }else{
+            span.css("color","red");
+        }
+        setTimeout(function(){
+            span.css("color","");
+        },500);
+    });
+}
+// 复制功能
+function copyText(text) {
+    var textarea = document.createElement("textarea");//创建input对象
+    var currentFocus = document.activeElement;//当前获得焦点的元素
+    document.body.appendChild(textarea);//添加元素
+    textarea.value = text;
+    textarea.focus();
+    if(textarea.setSelectionRange)
+        textarea.setSelectionRange(0, textarea.value.length);//获取光标起始位置到结束位置
+    else
+        textarea.select();
+    try {
+        var flag = document.execCommand("copy");//执行复制
+    } catch(eo) {
+        var flag = false;
+    }
+    document.body.removeChild(textarea);//删除元素
+    currentFocus.focus();
+    return flag;
+}
+// 插入代码
+function isEleExist(id) {
+    if($("#"+id).length <= 0) {
+        $("body").append($("<div>").attr("id",id).hide());     
+    }
+}
 
 // 重新解析markdown内容
 function reloadMainMarkdown() {
     var content = $("#main-markdown-content").text()
     if (content.length > 0) {
+        isEleExist("code-list");
+        $("#code-list").html("");
         $('#main-markdown-view').html(marked($("#main-markdown-content").text()));
         $('#main-markdown-view pre code').each(function(i, block) {
+            var thisBlock=$(block);
+            //记录代码块内容
+            var codeContent=$("<span>").text(thisBlock.text()).attr("id","code-content-id-"+i);
+            $("#code-list").append(codeContent);
+            // 添加复制按钮，添加class用于事件监听
+            var copyBtn=$("<span>").attr({
+                "style":"position: absolute;right: 5px;top: 3px;cursor:pointer;user-select:none;",
+                "title":"copy",
+                "code-id":""+i
+            }).addClass("copy-code");
+            copyBtn.append($(`<i class="doc-act-clip am-icon-copy"></i>`));
+            copyBtn.append("copy");
+            thisBlock.parent().append(copyBtn);
+            thisBlock.parent().attr("style","position: relative;");
+
             Prism.highlightElement(block);
         });
         // 生成TOC菜单
@@ -83,6 +142,8 @@ function reloadMainMarkdown() {
             html += $("#powered").html();
             $("#main-markdown-view").html(html)
         }
+
+        copyBtnOn();
     }
     replaceHrefAndSrc();
     updateHelpUrl(window.location.pathname);
