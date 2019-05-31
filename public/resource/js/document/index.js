@@ -120,7 +120,7 @@ function reloadMainMarkdown() {
             $("#code-list").append(codeContent);
             // 添加复制按钮，添加class用于事件监听
             var copyBtn = $("<span>").attr({
-                "style"   : "position: absolute;right: 5px;top: 3px;cursor:pointer;user-select:none;",
+                "style"   : "position: absolute;right: 5px;top: 3px;cursor:pointer;user-select:none;font-size:14px;",
                 "title"   : "copy",
                 "code-id" : "" + i
             }).addClass("copy-code");
