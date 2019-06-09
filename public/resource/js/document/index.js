@@ -107,6 +107,14 @@ function isEleExist(id) {
         $("body").append($("<div>").attr("id",id).hide());     
     }
 }
+// 判断元素是否存在滚动条
+function hasScrolled(element,direction){
+    if(direction==='vertical'){
+        return element.scrollHeight>element.clientHeight;
+    }else if(direction==='horizontal'){
+        return element.scrollWidth>element.clientWidth;
+    }
+}
 
 // 重新解析markdown内容
 function reloadMainMarkdown() {
@@ -122,18 +130,25 @@ function reloadMainMarkdown() {
             $("#code-list").append(codeContent);
             // 添加复制按钮，添加class用于事件监听
             var copyBtn=$("<span>").attr({
-                "style":"position:absolute;right:0px;top:0px;cursor:pointer;user-select:none;padding: 2px 5px;",
+                "style":"position:absolute;right:0px;top:0px;cursor:pointer;user-select:none;padding: 2px 8px;",
                 "title":"copy",
                 "code-id":""+i
             }).addClass("copy-code");
             copyBtn.html(`<i class="doc-act-clip am-icon-copy"></i>copy`);
             var copyDiv = $("<div>").attr({
-                "style":"color:#f8f8f2;position:relative; z-index:999;border-top-left-radius: 0.3em;border-top-right-radius: 0.3em;background: #272822;height:30px;border: 1px solid #dedede;border-bottom: 0;"
+                "style":"color:#f8f8f2;position:relative; z-index:999;margin-top: 8px;"
             }); 
             copyDiv.append(copyBtn)
             thisBlock.parent().before(copyDiv);
-            thisBlock.parent().attr("style","position: relative;margin-top: 0;border-top: 0;border-top-left-radius: 0;border-top-right-radius: 0;");
+            thisBlock.parent().attr("style","position: relative;").attr("class","check-scroll");
             Prism.highlightElement(block);
+            
+        });
+        //用于检测代码块是否有纵向滚动条
+        $(".check-scroll").each(function(){
+            if(hasScrolled(this ,'vertical')){
+                $(this).prev().find("span").css("padding","2px 24px");
+            }
         });
         // 生成TOC菜单
         $('#main-markdown-toc').html("");
