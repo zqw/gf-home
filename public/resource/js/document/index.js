@@ -69,12 +69,15 @@ function copyBtnOn() {
         var id=span.attr("code-id");
         var codeContent=$("#code-content-id-"+id);
         if(copyText(codeContent.text())){
-            span.css("color","green");
+            //span.css("color","#00ff00");
+            span.html(`<i class="doc-act-clip am-icon-copy"></i>success`);
         }else{
-            span.css("color","red");
+            //span.css("color","red");
+            span.html(`<i class="doc-act-clip am-icon-copy"></i>failure`);
         }
         setTimeout(function(){
-            span.css("color","");
+            //span.css("color","");
+            span.html(`<i class="doc-act-clip am-icon-copy"></i>copy`);
         },500);
     });
 }
@@ -119,15 +122,17 @@ function reloadMainMarkdown() {
             $("#code-list").append(codeContent);
             // 添加复制按钮，添加class用于事件监听
             var copyBtn=$("<span>").attr({
-                "style":"position: absolute;right: 5px;top: 3px;cursor:pointer;user-select:none;",
+                "style":"position:absolute;right:0px;top:0px;cursor:pointer;user-select:none;padding: 2px 5px;",
                 "title":"copy",
                 "code-id":""+i
             }).addClass("copy-code");
-            copyBtn.append($(`<i class="doc-act-clip am-icon-copy"></i>`));
-            copyBtn.append("copy");
-            thisBlock.parent().append(copyBtn);
-            thisBlock.parent().attr("style","position: relative;");
-
+            copyBtn.html(`<i class="doc-act-clip am-icon-copy"></i>copy`);
+            var copyDiv = $("<div>").attr({
+                "style":"color:#f8f8f2;position:relative; z-index:999;border-top-left-radius: 0.3em;border-top-right-radius: 0.3em;background: #272822;height:30px;border: 1px solid #dedede;border-bottom: 0;"
+            }); 
+            copyDiv.append(copyBtn)
+            thisBlock.parent().before(copyDiv);
+            thisBlock.parent().attr("style","position: relative;margin-top: 0;border-top: 0;border-top-left-radius: 0;border-top-right-radius: 0;");
             Prism.highlightElement(block);
         });
         // 生成TOC菜单
