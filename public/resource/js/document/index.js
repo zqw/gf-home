@@ -71,10 +71,10 @@ function copyBtnOn() {
         var codeContent=$("#code-content-id-"+id);
         if(copyText(codeContent.text())){
             //span.css("color","#00ff00");
-            span.html(`<i class="doc-act-clip am-icon-copy"></i>success`);
+            span.html(`<i class="doc-act-clip am-icon-copy"></i>done`);
         }else{
             //span.css("color","red");
-            span.html(`<i class="doc-act-clip am-icon-copy"></i>failure`);
+            span.html(`<i class="doc-act-clip am-icon-copy"></i>fail`);
         }
         setTimeout(function(){
             //span.css("color","");
