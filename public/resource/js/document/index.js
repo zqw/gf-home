@@ -62,7 +62,8 @@ function highlightLiByUri(uri) {
         openNode($(this));
     });
 }
-// 监听复制按钮
+
+// 监听按钮事件监听
 function copyBtnOn() {
     $('.copy-code').on('click',function() {
         var span=$(this);
@@ -130,7 +131,7 @@ function reloadMainMarkdown() {
             $("#code-list").append(codeContent);
             // 添加复制按钮，添加class用于事件监听
             var copyBtn=$("<span>").attr({
-                "style":"position:absolute;right:0px;top:0px;cursor:pointer;user-select:none;padding: 2px 8px;",
+                "style":"position:absolute;right:0px;top:0px;cursor:pointer;user-select:none;padding: 2px 8px;font-size:14px;",
                 "title":"copy",
                 "code-id":""+i
             }).addClass("copy-code");
