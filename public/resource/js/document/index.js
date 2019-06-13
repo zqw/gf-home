@@ -66,17 +66,20 @@ function highlightLiByUri(uri) {
 // 监听按钮事件监听
 function copyBtnOn() {
     $('.copy-code').on('click',function() {
-        var span = $(this);
-        var id   = span.attr("code-id");
-        var codeContent = $("#code-content-id-"+id);
-        if (copyText(codeContent.text())) {
-            span.css("color","green");
-        } else {
-            span.css("color","red");
+        var span=$(this);
+        var id=span.attr("code-id");
+        var codeContent=$("#code-content-id-"+id);
+        if(copyText(codeContent.text())){
+            //span.css("color","#00ff00");
+            span.html(`<i class="doc-act-clip am-icon-copy"></i>success`);
+        }else{
+            //span.css("color","red");
+            span.html(`<i class="doc-act-clip am-icon-copy"></i>failure`);
         }
         setTimeout(function(){
-            span.css("color","");
-        }, 500);
+            //span.css("color","");
+            span.html(`<i class="doc-act-clip am-icon-copy"></i>copy`);
+        },500);
     });
 }
 // 复制功能
@@ -105,6 +108,14 @@ function isEleExist(id) {
         $("body").append($("<div>").attr("id",id).hide());     
     }
 }
+// 判断元素是否存在滚动条
+function hasScrolled(element,direction){
+    if(direction==='vertical'){
+        return element.scrollHeight>element.clientHeight;
+    }else if(direction==='horizontal'){
+        return element.scrollWidth>element.clientWidth;
+    }
+}
 
 // 重新解析markdown内容
 function reloadMainMarkdown() {
@@ -119,17 +130,26 @@ function reloadMainMarkdown() {
             var codeContent=$("<span>").text(thisBlock.text()).attr("id","code-content-id-"+i);
             $("#code-list").append(codeContent);
             // 添加复制按钮，添加class用于事件监听
-            var copyBtn = $("<span>").attr({
-                "style"   : "position: absolute;right: 5px;top: 3px;cursor:pointer;user-select:none;font-size:14px;",
-                "title"   : "copy",
-                "code-id" : "" + i
+            var copyBtn=$("<span>").attr({
+                "style":"position:absolute;right:0px;top:0px;cursor:pointer;user-select:none;padding: 2px 8px;font-size:14px;",
+                "title":"copy",
+                "code-id":""+i
             }).addClass("copy-code");
-            copyBtn.append($(`<i class="doc-act-clip am-icon-copy"></i>`));
-            copyBtn.append("copy");
-            thisBlock.parent().append(copyBtn);
-            thisBlock.parent().attr("style","position: relative;");
-
+            copyBtn.html(`<i class="doc-act-clip am-icon-copy"></i>copy`);
+            var copyDiv = $("<div>").attr({
+                "style":"color:#f8f8f2;position:relative; z-index:999;margin-top: 8px;"
+            }); 
+            copyDiv.append(copyBtn)
+            thisBlock.parent().before(copyDiv);
+            thisBlock.parent().attr("style","position: relative;").attr("class","check-scroll");
             Prism.highlightElement(block);
+            
+        });
+        //用于检测代码块是否有纵向滚动条
+        $(".check-scroll").each(function(){
+            if(hasScrolled(this ,'vertical')){
+                $(this).prev().find("span").css("padding","2px 24px");
+            }
         });
         // 生成TOC菜单
         $('#main-markdown-toc').html("");
