@@ -147,8 +147,13 @@ function reloadMainMarkdown() {
         });
         //用于检测代码块是否有纵向滚动条
         $(".check-scroll").each(function(){
-            if(hasScrolled(this ,'vertical')){
-                $(this).prev().find("span").css("padding","2px 24px");
+            var ua=navigator.userAgent;
+            if(hasScrolled(this ,'vertical') && ua.search("Mobile")==-1){
+                if(ua.search("Windows NT")!=-1){
+                    $(this).prev().find("span").css("padding","2px 22px");
+                }else{
+                    $(this).prev().find("span").css("padding","2px 16px");
+                }
             }
         });
         // 生成TOC菜单
