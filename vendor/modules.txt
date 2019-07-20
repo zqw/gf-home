@@ -1,3 +1,5 @@
+# blackfriday v0.0.0 => /home/zhaoqiangwei/mygit/com.study/go-proj/gf-home/jar_package/gopkg.in/russross/blackfriday.v2
+blackfriday
 # github.com/gogf/gf v1.8.0
 github.com/gogf/gf/g
 github.com/gogf/gf/g/net/ghttp
@@ -83,8 +85,12 @@ github.com/gogf/gf/third/golang.org/x/text/encoding/unicode
 github.com/gogf/gf/third/golang.org/x/text/encoding/internal
 github.com/gogf/gf/third/golang.org/x/text/internal/utf8internal
 github.com/gogf/gf/third/golang.org/x/text/runes
-# github.com/gogf/gf-home v0.0.0-20190627110514-84ecab254b8b
+# github.com/gogf/gf-home v0.0.0 => /home/zhaoqiangwei/mygit/com.study/go-proj/gf-home
 github.com/gogf/gf-home/boot
 github.com/gogf/gf-home/router
 github.com/gogf/gf-home/app/service/document
 github.com/gogf/gf-home/app/api/document
+# github.com/shurcooL/sanitized_anchor_name v1.0.0
+github.com/shurcooL/sanitized_anchor_name
+# google.golang.org/appengine v1.6.1
+google.golang.org/appengine/cloudsql

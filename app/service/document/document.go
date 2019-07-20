@@ -12,7 +12,7 @@ import (
     "github.com/gogf/gf/g/text/gregex"
     "github.com/gogf/gf/g/text/gstr"
     "github.com/gogf/gf/g/util/gconv"
-    "gopkg.in/russross/blackfriday.v2"
+    "blackfriday"
     "strings"
 )
 
