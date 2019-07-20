@@ -6,7 +6,7 @@ require (
 	blackfriday v0.0.0
 	github.com/gogf/gf v1.8.0
 	github.com/gogf/gf-home v0.0.0
-	github.com/shurcooL/sanitized_anchor_name v1.0.0
+	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 )
 
 replace github.com/gogf/gf-home => ../gf-home
